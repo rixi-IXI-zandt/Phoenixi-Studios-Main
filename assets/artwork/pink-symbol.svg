@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="pinkGradSymbol" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff8fd0" />
+      <stop offset="100%" stop-color="#ff33a0" />
+    </linearGradient>
+  </defs>
+  <!-- Pink Geometric Crystal Symbol -->
+  <g stroke="url(#pinkGradSymbol)" stroke-width="2.5" fill="none" stroke-linejoin="round">
+    <polygon points="50,10 80,40 50,90 20,40" />
+    <polygon points="50,10 65,40 50,90 35,40" stroke-dasharray="2 1" />
+    <line x1="20" y1="40" x2="80" y2="40" />
+    <line x1="50" y1="10" x2="50" y2="90" />
+    <circle cx="50" cy="40" r="3" fill="#ff65b5" />
+  </g>
+</svg>

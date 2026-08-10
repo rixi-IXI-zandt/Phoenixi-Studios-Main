@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="100%" height="100%">
+  <g stroke="#00f0ff" stroke-width="1.8" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Geometric Phoenixi/Rixi lower-right corner emblem -->
+    <path d="M 310,20 L 310,300 L 20,300" stroke-width="2.5" />
+    <path d="M 295,40 L 295,285 L 40,285" opacity="0.6" />
+    
+    <!-- Stylized bird / crystal motif -->
+    <polygon points="220,220 280,160 280,280 160,280" stroke-width="1.5" />
+    <polygon points="240,240 270,190 270,270 190,270" stroke="#ff65b5" fill="none" />
+    <line x1="220" y1="220" x2="280" y2="280" stroke="#00f0ff" />
+    <circle cx="220" cy="220" r="3" fill="#00f0ff" />
+    <circle cx="160" cy="280" r="2.5" fill="#ff65b5" />
+    <circle cx="280" cy="160" r="2.5" fill="#ff65b5" />
+  </g>
+</svg>
