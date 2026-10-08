@@ -1,0 +1,16 @@
+.navigation-curtain{position:fixed;inset:0;z-index:40;overflow:hidden;isolation:isolate;touch-action:none}
+.curtain-leaf{position:absolute;top:0;bottom:0;width:50.1%;background:#090b0e;will-change:transform;overflow:hidden}
+.curtain-left{left:0;border-right:1px solid #6ef0ff99;background:radial-gradient(ellipse at 100% 50%,#6ef0ff12,transparent 65%),#090b0e}
+.curtain-right{right:0;border-left:1px solid #e2b3ff99;background:radial-gradient(ellipse at 0 50%,#9b6bff18,transparent 65%),#090b0e}
+.curtain-leaf:before,.curtain-leaf:after{content:'';position:absolute;top:24px;bottom:24px;width:1px;background:linear-gradient(transparent,#b8ffd960,transparent)}
+.curtain-left:before{right:10px}.curtain-left:after{right:19px}.curtain-right:before{left:10px}.curtain-right:after{left:19px}
+.curtain-seal{position:absolute;left:50%;top:50%;display:flex;flex-direction:column;align-items:center;gap:22px;transform:translate(-50%,-50%);opacity:0;transition:opacity .22s ease;pointer-events:none}
+.curtain-seal span{width:10px;height:10px;transform:rotate(45deg);background:var(--mint);box-shadow:0 0 24px #6ef0ff88;animation:seal-breathe 1.8s ease-in-out infinite alternate}
+.curtain-seal i{width:1px;height:58px;background:linear-gradient(transparent,var(--purple))}.curtain-seal i:last-child{transform:rotate(180deg)}
+.navigation-curtain[data-phase=covered] .curtain-seal{opacity:1}
+.navigation-curtain[data-phase=open] .curtain-left,.navigation-curtain[data-phase=opening] .curtain-left{transform:translateX(-101%)}
+.navigation-curtain[data-phase=open] .curtain-right,.navigation-curtain[data-phase=opening] .curtain-right{transform:translateX(101%)}
+.navigation-notice{position:fixed;left:50%;bottom:110px;transform:translateX(-50%);width:min(560px,calc(100% - 40px));padding:20px;background:#10141bf5;border:1px solid var(--purple);z-index:45;display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:.875rem;line-height:1.5}
+.navigation-notice span{flex:1 1 230px}.navigation-notice button{border:1px solid var(--mint);background:transparent;color:var(--mint);padding:10px 16px;min-height:44px}
+@keyframes seal-breathe{from{opacity:.5;box-shadow:0 0 12px #6ef0ff44}to{opacity:1;box-shadow:0 0 26px #e2b3ff88}}
+@media(prefers-reduced-motion:reduce){.curtain-seal span{animation:none}.curtain-seal{transition:none}}
