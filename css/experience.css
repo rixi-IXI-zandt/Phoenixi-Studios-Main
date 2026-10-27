@@ -16,15 +16,31 @@ h1{color:var(--accent)}.title-rule span{background:linear-gradient(90deg,transpa
 .section-end{display:flex;justify-content:space-between;gap:20px;margin-top:70px;padding:26px 0;border-top:1px solid #e2b3ff44}.section-end a{font-size:.75rem;letter-spacing:2px;min-height:44px;display:flex;align-items:center;color:var(--mint)}
 .reveal{opacity:0;translate:0 32px;transition:opacity .9s ease,translate .9s cubic-bezier(.16,1,.3,1)}.reveal.is-visible{opacity:1;translate:0 0}.portal:nth-child(2){transition-delay:.08s}.portal:nth-child(3){transition-delay:.16s}
 @keyframes crest-light{to{filter:drop-shadow(0 0 28px #e2b3ff50)}}@keyframes invitation{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(7px);opacity:1}}@keyframes frame-open{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
-html[data-motion=off] .reveal{opacity:1;translate:none}html[data-motion=off] .relic{transform:none}
 @media(max-width:700px){main{padding:0 25px}.scene{min-height:calc(100svh - 180px);padding:25px 0;--relic-size:clamp(260px,42svh,360px)}.presentation{padding-top:45px}.portal-grid,.world-grid,.editorial-grid,.contact-layout{grid-template-columns:1fr}.portal{min-height:280px}.portal-aperture{min-height:110px}.world-slot:first-child{grid-column:auto}.statement-frame{border-left:0;border-top:1px solid #e2b3ff33}.editorial-grid .media-frame{aspect-ratio:4/3}.contact-route{padding:28px;min-height:210px}.section-heading{gap:16px}.section-heading>.slot-label{margin-left:0}.project-caption{padding:20px;flex-wrap:wrap}.scene-nav a{letter-spacing:1px;font-size:.875rem;min-height:58px}.section-end a{letter-spacing:1px}.site-footer{padding-left:20px;padding-right:20px}.scene-nav{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(min-width:700px) and (max-height:650px){.scene{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100svh - 185px);--relic-size:260px}.scene-kicker{grid-column:1/-1}.scene-copy{padding:10px}.relic{margin:-20px 0}.presentation{padding-top:40px}}
 .artist-section{margin-top:36px;border-color:var(--purple)}.artist-portrait{margin:0;padding:clamp(18px,3vw,36px);display:grid;place-items:center;background:#090b0e}.artist-portrait img{display:block;width:100%;height:auto;max-width:580px;object-fit:contain}.artist-section .statement-frame h3{color:var(--mint)}
 .studio-biography{border:1px solid #e2b3ff55;background:#0a101740}.studio-biography .statement-frame{border:0;max-width:900px;margin:auto}.biography-copy{font-size:1rem;line-height:1.85;color:#deddd6;letter-spacing:.01em;text-align:left;overflow-wrap:break-word}.biography-copy p{margin:0 0 1.35em}.biography-copy p:last-child{margin-bottom:0}.artist-section{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}.artist-section .statement-frame{justify-content:flex-start;padding:clamp(25px,4vw,52px)}.artist-section .artist-portrait{align-content:start}.artist-section .artist-portrait img{position:sticky;top:36px}.artist-section .biography-copy{max-width:65ch}
 @media(max-width:850px){.artist-section{grid-template-columns:1fr}.artist-section .artist-portrait img{position:static;max-width:460px}.artist-section .statement-frame{border-left:0;border-top:1px solid #e2b3ff33}.studio-biography .statement-frame{padding:28px}.artist-section .biography-copy{max-width:none}}
 .presentation{width:100%}.media-frame{width:100%;min-width:0}.editorial-grid>*,.contact-layout>*{min-width:0}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;translate:none}.relic{transform:none}}
 
-/* Worlds uses the same link frames and type scale as Contact. */
-.world-routes{grid-template-columns:repeat(2,minmax(0,1fr))}.world-routes .contact-route{border-color:#6ef0ff55}.world-routes .contact-route h3{color:var(--cyan)}.world-routes .contact-route:hover{background:#6ef0ff0a;border-color:var(--cyan)}
-@media(max-width:700px){.world-routes{grid-template-columns:1fr}}
+/* Shared presentation language: display lettering, open space and fine rules. */
+.presentation{max-width:900px;padding-top:36px}
+.destination-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:64px}
+.destination{--destination-color:var(--cyan);position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:38px 12px;text-align:center;min-width:0;color:var(--destination-color)}
+.destination:nth-child(2){--destination-color:var(--mint)}
+.fine-rule:before,.fine-rule:after{content:'';position:absolute;top:0;height:1px;width:calc(50% - 12px);background:linear-gradient(90deg,transparent,var(--destination-color));opacity:.5}
+.fine-rule:before{left:0}.fine-rule:after{right:0;transform:scaleX(-1)}
+.destination-context{color:var(--purple);font-size:.6875rem;letter-spacing:.22em;line-height:1.5}
+.destination-title{font-family:Ironick,Georgia,serif;font-size:clamp(2rem,3.5vw,3.25rem);font-weight:400;letter-spacing:.1em;line-height:1.2;padding-left:.1em}
+.destination-action{display:flex;align-items:center;justify-content:center;gap:12px;font-size:.6875rem;letter-spacing:.13em;line-height:1.6}
+.destination-action>span{font-size:1.1rem;transition:transform .35s}
+.destination-address{letter-spacing:.04em;overflow-wrap:anywhere}
+.studio-biography{border:0;background:transparent;max-width:680px;margin:0 auto}
+.studio-heading{--destination-color:var(--purple);position:relative;display:flex;flex-direction:column;align-items:center;gap:22px;padding:38px 0;text-align:center}
+.studio-heading .destination-title{color:var(--purple);margin:0}
+.studio-biography .biography-copy{font-family:'Josefin Sans',sans-serif;padding:0 12px;font-size:1.1875rem;line-height:1.75;font-weight:400;letter-spacing:.015em}
+.destination:hover .destination-title,.destination:focus-visible .destination-title{text-shadow:0 0 24px color-mix(in srgb,var(--destination-color) 35%,transparent)}
+.destination:hover .destination-action>span,.destination:focus-visible .destination-action>span{transform:translate(3px,-3px)}
+.section-end{margin-top:24px}
+@media(max-width:700px){.presentation{max-width:440px;padding-top:24px}.destination-list{grid-template-columns:1fr;row-gap:12px}.destination{padding:30px 12px;gap:18px}.destination-title{font-size:2.25rem}.section-end{margin-top:12px}}
+@media(max-width:700px){.studio-biography .biography-copy{font-size:1.125rem}}

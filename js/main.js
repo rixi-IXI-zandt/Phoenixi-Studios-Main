@@ -12,9 +12,9 @@
   };
   const root=document.documentElement, scene=document.querySelector('.scene'), main=document.querySelector('main');
   const detail=document.querySelector('#scene-detail'), presentation=document.querySelector('#presentation');
-  const status=document.querySelector('#scene-status'), motionButton=document.querySelector('.motion-control');
-  const reduced=matchMedia('(prefers-reduced-motion: reduce)'), fine=matchMedia('(hover: hover) and (pointer: fine)');
-  let paused=false, active='', revision=0, animations=[];
+  const status=document.querySelector('#scene-status');
+  const fine=matchMedia('(hover: hover) and (pointer: fine)');
+  let active='', revision=0, animations=[];
   let transitionController=null;
   const curtain=document.createElement('div');
   curtain.className='navigation-curtain';curtain.hidden=true;curtain.setAttribute('aria-hidden','true');
@@ -29,29 +29,27 @@
   let retryDestination=null;
   retry.addEventListener('click',()=>{if(retryDestination)navigate(retryDestination.name,retryDestination.push)});
   dismiss.addEventListener('click',()=>{notice.hidden=true;main.focus({preventScroll:true})});
-  try {paused=localStorage.getItem('ixi-motion')==='off'} catch {}
-  const moving=()=>!paused&&!reduced.matches;
   const cancel=()=>{animations.forEach(a=>a.cancel());animations=[]};
-  function updateMotion(){
-    root.dataset.motion=moving()?'on':'off';
-    motionButton.setAttribute('aria-pressed',String(!moving()));
-    motionButton.setAttribute('aria-label',reduced.matches?'Reduced motion enabled by your device':paused?'Enable motion':'Pause motion');
-    motionButton.querySelector('.motion-label').textContent=reduced.matches?'REDUCED MOTION':paused?'MOTION OFF':'MOTION ON';
-    motionButton.disabled=reduced.matches;
-    if(!moving())cancel();
-  }
-  motionButton.addEventListener('click',()=>{paused=!paused;try{localStorage.setItem('ixi-motion',paused?'off':'on')}catch{}updateMotion()});
-  reduced.addEventListener('change',updateMotion);updateMotion();
   const route=()=>{const name=location.pathname.slice(basePath.length).replace(/\/index\.html$/,'').replace(/^\/+|\/+$/g,'').replace(/\.html$/,'');return Object.hasOwn(scenes,name)?name:'home'};
   const sections={
     home:()=>'',
-    worlds:()=>`<div class="section-heading"><span class="folio">EXPLORE</span><h2>Worlds</h2></div>
-      <div class="contact-layout world-routes">
-        <a class="contact-route reveal" href="https://rixi-shop.fourthwall.com/" target="_blank" rel="noopener noreferrer"><span class="folio">01 / SHOP</span><h3>Rixi Shop</h3><span class="contact-address">Visit the Fourthwall shop</span><span class="route-arrow" aria-hidden="true">↗</span></a>
-        <a class="contact-route reveal" href="https://discord.gg/D6hDNAtXMY" target="_blank" rel="noopener noreferrer"><span class="folio">02 / COMMUNITY</span><h3>Discord</h3><span class="contact-address">Join the community</span><span class="route-arrow" aria-hidden="true">↗</span></a>
-      </div>`,
-    about:()=>`<div class="section-heading"><span class="folio">STUDIO</span><h2>About</h2></div>
-      <section class="studio-biography reveal" aria-labelledby="studio-title"><div class="statement-frame"><span class="folio">01 / STUDIO</span><h3 id="studio-title">Phoenixi Studios</h3><div class="biography-copy">
+    worlds:()=>`<h2 class="sr-only">Explore Worlds</h2>
+      <nav class="destination-list" aria-label="Shop and community">
+        <a class="world-destination destination fine-rule reveal" href="https://shop.rixi.info/" target="_blank" rel="noopener noreferrer">
+          <span class="destination-context">FOURTHWALL</span>
+          <span class="destination-title">RIXI SHOP</span>
+          <span class="destination-action">EXPLORE THE SHOP <span aria-hidden="true">↗</span></span>
+          <span class="sr-only">Opens in a new tab</span>
+        </a>
+        <a class="world-destination destination fine-rule reveal" href="https://discord.gg/D6hDNAtXMY" target="_blank" rel="noopener noreferrer">
+          <span class="destination-context">COMMUNITY</span>
+          <span class="destination-title">DISCORD</span>
+          <span class="destination-action">JOIN THE CONVERSATION <span aria-hidden="true">↗</span></span>
+          <span class="sr-only">Opens in a new tab</span>
+        </a>
+      </nav>`,
+    about:()=>`<section class="studio-biography reveal" aria-labelledby="studio-title">
+      <header class="studio-heading fine-rule"><span class="destination-context">THE STUDIO</span><h2 class="destination-title" id="studio-title">PHOENIXI STUDIOS</h2></header><div class="biography-copy">
         <p>Phoenixi Studios began with a simple problem: Rixi has never been very good at keeping one kind of creativity separate from another.</p>
         <p>Art becomes writing. Writing becomes worldbuilding. Worldbuilding becomes architecture. Architecture becomes software. Research becomes a Grimoire. A drawing becomes a symbol, a garment, an object or the beginning of an entirely new system.</p>
         <p>So Phoenixi Studios became the place where all of it could belong.</p>
@@ -59,9 +57,20 @@
         <p>Some projects are practical. Some are strange. Some are deeply personal. Many become several things at once.</p>
         <p>Together they form a living body of work concerned with creation, knowledge, identity, transformation, relationship and the unexpected structures connecting seemingly unrelated things.</p>
         <p>Phoenixi Studios is the workshop where those structures are discovered by making them real.</p>
-      </div></div></section>
+      </div></section>
 `,
-    contact:()=>`<div class="section-heading"><span class="folio">DIRECT</span><h2>Contact</h2></div><div class="contact-layout"><a class="contact-route reveal" href="mailto:rixizandt@gmail.com"><span class="folio">01 / EMAIL</span><h3>Get in touch</h3><span class="contact-address">rixizandt@gmail.com</span><span class="route-arrow" aria-hidden="true">↗</span></a><div class="community-routes"><a class="contact-route reveal" href="https://www.instagram.com/rixiphoenixi/" target="_blank" rel="noopener noreferrer"><span class="folio">02 / SOCIAL</span><h3>Instagram</h3><span class="route-arrow" aria-hidden="true">↗</span></a></div></div>`
+    contact:()=>`<h2 class="sr-only">Contact the Studio</h2>
+      <nav class="destination-list" aria-label="Email and Instagram">
+        <a class="destination fine-rule reveal" href="mailto:rixizandt@gmail.com">
+          <span class="destination-context">DIRECT</span><span class="destination-title">EMAIL</span>
+          <span class="destination-action destination-address">rixizandt@gmail.com <span aria-hidden="true">↗</span></span>
+        </a>
+        <a class="destination fine-rule reveal" href="https://www.instagram.com/ixizandt/" target="_blank" rel="noopener noreferrer">
+          <span class="destination-context">SOCIAL</span><span class="destination-title">INSTAGRAM</span>
+          <span class="destination-action">@IXIZANDT <span aria-hidden="true">↗</span></span>
+          <span class="sr-only">Opens in a new tab</span>
+        </a>
+      </nav>`
   };
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}}),{threshold:0});
   function render(name,announce,preparedHTML){
@@ -100,7 +109,7 @@
       await preload.decode();if(!preload.naturalWidth)throw new Error('Image unavailable');
     });
     const posterJobs=[...container.querySelectorAll('video[poster]')].map(async video=>{const image=new Image();image.src=video.poster;await image.decode()});
-    const fonts=document.fonts?Promise.all([document.fonts.load('1em Ironick'),document.fonts.ready]):Promise.resolve();
+    const fonts=document.fonts?Promise.all([document.fonts.load('1em Ironick'),document.fonts.load('1em "Josefin Sans"'),document.fonts.ready]):Promise.resolve();
     await bounded(Promise.all([...imageJobs,...posterJobs,fonts]),signal);aborted(signal);
   }
   async function prepareScene(name,signal){
@@ -110,12 +119,12 @@
     scene.querySelectorAll('img').forEach(image=>staging.append(image.cloneNode(true)));
     await readyAssets(staging,signal);return html;
   }
-  async function shutter(open,signal){
+  async function shutter(open,signal,desktopMotion){
     aborted(signal);curtain.dataset.phase=open?'opening':'closing';
-    if(!moving()||!curtain.animate){curtain.dataset.phase=open?'open':'covered';return}
+    if(!curtain.animate){curtain.dataset.phase=open?'open':'covered';return}
     const jobs=leaves.map((leaf,index)=>{
       const outside=`translateX(${index===0?'-':''}101%)`;
-      return leaf.animate([{transform:open?'translateX(0)':outside},{transform:open?outside:'translateX(0)'}],{duration:open?900:520,easing:open?'cubic-bezier(.16,1,.3,1)':'cubic-bezier(.65,0,.35,1)',fill:'forwards'});
+      return leaf.animate([{transform:open?'translateX(0)':outside},{transform:open?outside:'translateX(0)'}],{duration:desktopMotion?(open?2200:1400):(open?900:520),easing:desktopMotion?'cubic-bezier(.42,0,.32,1)':open?'cubic-bezier(.16,1,.3,1)':'cubic-bezier(.65,0,.35,1)',fill:'forwards'});
     });
     animations=jobs;await Promise.all(jobs.map(job=>job.finished.catch(()=>{})));aborted(signal);
     curtain.dataset.phase=open?'open':'covered';cancel();
@@ -124,13 +133,15 @@
     if(!Object.hasOwn(scenes,name)||(active===name&&curtain.hidden))return;
     const token=++revision;transitionController?.abort();cancel();
     const controller=new AbortController(),signal=controller.signal;transitionController=controller;
+    // Freeze the viewport choice for this transition; retain the mobile choreography.
+    const desktopMotion=matchMedia('(min-width: 900px)').matches;
     const previous=active,previousScroll=scrollY,previousHTML=sections[previous]();let swapped=false;
     notice.hidden=true;curtain.hidden=false;main.inert=true;main.setAttribute('aria-busy','true');
     document.querySelector('.scene-nav').inert=true;root.dataset.navigation='preparing';status.textContent='Preparing section';
     try{
       // Loading runs concurrently with closure. A slow request extends the covered phase.
       const preparation=bounded(prepareScene(name,signal),signal);
-      const [prepared,closed]=await Promise.allSettled([preparation,shutter(false,signal)]);aborted(signal);
+      const [prepared,closed]=await Promise.allSettled([preparation,shutter(false,signal,desktopMotion)]);aborted(signal);
       if(prepared.status==='rejected')throw prepared.reason;
       if(closed.status==='rejected')throw closed.reason;
       const html=prepared.value;
@@ -138,11 +149,13 @@
       render(name,false,html);swapped=true;window.scrollTo({top:0,behavior:'instant'});
       await readyAssets(main,signal);
       await bounded(new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))),signal);
+      // Let the closed curtain settle on wide screens instead of flashing the seal.
+      if(desktopMotion)await bounded(new Promise(resolve=>setTimeout(resolve,400)),signal);
       aborted(signal);
       // Commit the URL only after the destination is prepared successfully.
       if(push)history.pushState({},'',sceneURL(name));
       root.dataset.navigation='revealing';
-      await shutter(true,signal);aborted(signal);
+      await shutter(true,signal,desktopMotion);aborted(signal);
       status.textContent=`${scenes[name].title} section`;
     }catch(error){
       if(signal.aborted)return;
@@ -151,7 +164,7 @@
       window.scrollTo({top:previousScroll,behavior:'instant'});
       retryDestination={name,push};notice.hidden=false;
       status.textContent='Section could not load. Previous section retained.';
-      await shutter(true,signal).catch(()=>{});
+      await shutter(true,signal,desktopMotion).catch(()=>{});
     }finally{
       if(token===revision){cancel();curtain.hidden=true;main.inert=false;main.removeAttribute('aria-busy');document.querySelector('.scene-nav').inert=false;root.dataset.navigation='idle';main.focus({preventScroll:true});transitionController=null}
     }
@@ -160,5 +173,5 @@
   window.addEventListener('popstate',()=>navigate(route(),false));render(route(),false);
   let frame=0;
   window.addEventListener('scroll',()=>{if(frame)return;frame=requestAnimationFrame(()=>{root.style.setProperty('--scroll',String(Math.min(scrollY/Math.max(innerHeight,1),1)));frame=0})},{passive:true});
-  window.addEventListener('pointermove',event=>{if(!moving()||!fine.matches)return;root.style.setProperty('--light-x',`${44+event.clientX/innerWidth*12}%`);root.style.setProperty('--light-y',`${36+event.clientY/innerHeight*12}%`)},{passive:true});
+  window.addEventListener('pointermove',event=>{if(!fine.matches)return;root.style.setProperty('--light-x',`${44+event.clientX/innerWidth*12}%`);root.style.setProperty('--light-y',`${36+event.clientY/innerHeight*12}%`)},{passive:true});
 })();

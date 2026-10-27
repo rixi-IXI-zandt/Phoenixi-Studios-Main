@@ -17,7 +17,7 @@ const localizeHTML = text => text.replace(/\b(href|src)="\/(?!\/)/g, `$1="${base
 const shell = localizeHTML(await readFile(new URL('index.html', root), 'utf8'));
 for (const dir of ['assets', 'css', 'js']) await mkdir(new URL(`${dir}/`, output));
 // Explicit public assets only: no archives, source documents or unused artwork.
-for (const file of ['IXI_Gem_Iceblue_512x296px.png', 'IXI-Crest.png', 'rixi-ixi.png', 'IronickNF.otf']) {
+for (const file of ['IXI_Gem_Iceblue_512x296px.png', 'IXI-Crest.png', 'rixi-ixi.png', 'IronickNF.otf', 'JosefinSans.ttf', 'JosefinSans-OFL.txt']) {
   await copyFile(new URL(`assets/${file}`, root), new URL(`assets/${file}`, output));
 }
 for (const file of ['css/global.css', 'css/experience.css', 'css/transitions.css', 'js/main.js']) {
@@ -31,5 +31,5 @@ for (const page of ['about', 'worlds', 'contact']) {
   await writeFile(new URL(`${page}/index.html`, output), shell);
 }
 await writeFile(new URL('.nojekyll', output), '');
-await writeFile(new URL('404.html', output), `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Page not found — IXI</title><style>body{background:#090b0e;color:#e2b3ff;font:1.1rem/1.8 system-ui;padding:12vh 8vw}a{color:#6ef0ff}</style><h1>Page not found</h1><p>This address does not lead to a page.</p><a href="${base}">Return to IXI</a></html>`);
+await writeFile(new URL('404.html', output), `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Page not found — IXI</title><link rel="stylesheet" href="${base}css/global.css"><style>h1{font-family:Ironick,serif}body{background:#090b0e;color:#e2b3ff;font:1.1rem/1.8 Arial,Helvetica,sans-serif;padding:12vh 8vw}a{color:#6ef0ff}</style><h1>Page not found</h1><p>This address does not lead to a page.</p><a href="${base}">Return to IXI</a></html>`);
 console.log(`IXI static build complete. Base path: ${base}`);

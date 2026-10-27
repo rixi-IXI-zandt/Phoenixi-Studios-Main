@@ -19,7 +19,7 @@ For a subdirectory deployment, set `BASE_PATH=/studio/` when building and when r
 ## GitHub Pages
 
 1. This site's repository is [rixi-IXI-zandt/Phoenixi-Studios-Main](https://github.com/rixi-IXI-zandt/Phoenixi-Studios-Main). Keep only site files at its root, not the whole G drive. GitHub Free supports Pages from **public** repositories; check privacy before uploading.
-2. Include `index.html`, `js/`, `css/`, `build.mjs`, `server.mjs`, `scripts/`, `package.json`, `package-lock.json`, `.gitignore`, `.github/workflows/pages.yml` and the four assets named in `build.mjs`. Do not upload the old ZIP, backups, unrelated artwork, private research or credentials. A public repository exposes source files even if they are excluded from the deployed `dist/`.
+2. Include `index.html`, `js/`, `css/`, `build.mjs`, `server.mjs`, `scripts/`, `package.json`, `package-lock.json`, `.gitignore`, `.github/workflows/pages.yml` and the assets named in `build.mjs`. Do not upload the old ZIP, backups, unrelated artwork, private research or credentials. A public repository exposes source files even if they are excluded from the deployed `dist/`.
 3. In repository **Settings → Pages → Build and deployment**, choose **GitHub Actions**.
 4. Push to the repository's default branch, or run **Deploy static site to GitHub Pages** manually from Actions. The workflow checks, builds and publishes only `dist/`.
 5. Test all four routes on the provided GitHub address before attaching the domain. Direct visits, reloads, trailing-slash routes and legacy `.html` routes are supported.
@@ -50,6 +50,10 @@ The same `dist/` can be uploaded to a static host. For Cloudflare Pages use no f
 
 The animated interface requires JavaScript; a no-script email fallback is provided. Layout follows viewport width/height, and fine pointers enable subtle light response. System reduced motion takes precedence over the saved motion toggle. Internal navigation prepares images and fonts beneath the curtain, retains the previous page on failure, and supports browser history. Direct initial visits load like a normal static site. Future remote data must be awaited inside `prepareScene` before revealing the destination.
 
-Contact retains email and Instagram. Discord is on Worlds alongside a Rixi Shop entry linking to https://rixi-shop.fourthwall.com/ in a new tab. This is a shop link, not an embedded product catalogue or checkout. No contact form, analytics, account system or backend is implied. Check ownership and external-link availability before public launch. The original ZIP and the separately stored source backup are preserved locally, not included in the static build.
+Contact retains email and Instagram. Discord is on Worlds alongside a Rixi Shop entry linking to https://shop.rixi.info/ in a new tab. This is a shop link, not an embedded product catalogue or checkout. No contact form, analytics, account system or backend is implied. Check ownership and external-link availability before public launch. The original ZIP and the separately stored source backup are preserved locally, not included in the static build.
 
 When adding new public assets, add their filenames to the explicit list in `build.mjs` and update the corresponding integrity check. See `HOSTING-CHECK.md` for the latest local verification scope and remaining launch steps.
+
+## Local typography and motion
+
+Ironick remains the display face. Josefin Sans is scoped only to the About biography paragraphs; navigation, links and labels retain their previous typography. Josefin Sans and its OFL license are included in the public asset list (source: https://github.com/google/fonts/tree/main/ofl/josefinsans). Wide-screen transitions use a slower close/settle/reveal sequence; mobile timings are unchanged. There is no motion toggle or saved motion preference; the animation runs as part of the site experience.

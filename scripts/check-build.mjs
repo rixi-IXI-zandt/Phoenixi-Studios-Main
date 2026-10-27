@@ -22,7 +22,7 @@ try {
     }
     const css = await readFile(new URL('css/global.css',output),'utf8');
     assert.ok(css.includes(`url('${base}assets/IronickNF.otf')`));
-    assert.deepEqual((await readdir(new URL('assets/',output))).sort(), ['IXI-Crest.png','IXI_Gem_Iceblue_512x296px.png','IronickNF.otf','rixi-ixi.png'].sort());
+    assert.deepEqual((await readdir(new URL('assets/',output))).sort(), ['IXI-Crest.png','IXI_Gem_Iceblue_512x296px.png','IronickNF.otf','JosefinSans.ttf','JosefinSans-OFL.txt','rixi-ixi.png'].sort());
     assert.ok((await stat(new URL('.nojekyll',output))).isFile());
     console.log(`PASS: static routes, assets and public file boundary at ${base}`);
   }
