@@ -47,7 +47,12 @@
   const emptyText=()=>'<div class="copy-space" aria-label="Empty text frame"><span class="slot-label">TEXT</span><i></i><i></i><i></i></div>';
   const sections={
     home:()=>'',
-    worlds:()=>`<div class="section-heading"><span class="folio">CATALOGUE</span><h2>Worlds</h2><span class="slot-label">UNFILLED</span></div><div class="world-grid">${['01','02','03'].map((n)=>`<details class="world-slot reveal"><summary>${emptyMedia('PROJECT IMAGE')}<span class="project-caption"><span>Project ${n}</span><span class="expand-label">VIEW FRAME <b aria-hidden="true">+</b></span></span></summary><div class="project-expanded"><h3>Project overview</h3>${emptyText()}<div class="project-specs"><div><span class="slot-label">FORMAT</span><span>—</span></div><div><span class="slot-label">STATUS</span><span>—</span></div></div></div></details>`).join('')}</div>`,
+    worlds:()=>`<div class="section-heading"><span class="folio">CATALOGUE</span><h2>Worlds</h2></div>
+      <a class="shop-entry reveal" href="https://rixi-shop.fourthwall.com/" target="_blank" rel="noopener noreferrer" aria-labelledby="shop-title shop-action">
+        <div class="shop-art" aria-hidden="true"><img src="/assets/IXI_Gem_Iceblue_512x296px.png" alt="" width="512" height="296" decoding="async"></div>
+        <div class="shop-copy"><span class="folio">SHOP / FOURTHWALL</span><h3 id="shop-title">Rixi Shop</h3><p>Explore the shop on Fourthwall.</p><span class="shop-action" id="shop-action">VISIT THE SHOP <span aria-hidden="true">↗</span></span><span class="shop-destination">Opens Fourthwall in a new tab</span></div>
+      </a>
+      <div class="world-grid">${['01','02','03'].map((n)=>`<details class="world-slot reveal"><summary>${emptyMedia('PROJECT IMAGE')}<span class="project-caption"><span>Project ${n}</span><span class="expand-label">VIEW FRAME <b aria-hidden="true">+</b></span></span></summary><div class="project-expanded"><h3>Project overview</h3>${emptyText()}<div class="project-specs"><div><span class="slot-label">FORMAT</span><span>—</span></div><div><span class="slot-label">STATUS</span><span>—</span></div></div></div></details>`).join('')}</div>`,
     about:()=>`<div class="section-heading"><span class="folio">STUDIO</span><h2>About</h2></div>
       <section class="studio-biography reveal" aria-labelledby="studio-title"><div class="statement-frame"><span class="folio">01 / STUDIO</span><h3 id="studio-title">Phoenixi Studios</h3><div class="biography-copy">
         <p>Phoenixi Studios began with a simple problem: Rixi has never been very good at keeping one kind of creativity separate from another.</p>
