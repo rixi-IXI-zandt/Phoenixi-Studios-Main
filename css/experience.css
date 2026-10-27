@@ -1,9 +1,4 @@
 /* IXI identity: exact original brand values; light intensity is separate. */
-.shop-entry{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-bottom:36px;border:1px solid #6ef0ff55;background:#0a101780;color:var(--cyan)}
-.shop-entry:hover{border-color:var(--cyan);background:#101822}.shop-entry:focus-visible{outline:2px solid var(--mint);outline-offset:5px}
-.shop-art{display:grid;place-items:center;min-width:0;padding:clamp(28px,5vw,64px);background:radial-gradient(ellipse,#9b6bff20,transparent 72%)}.shop-art img{display:block;width:100%;max-width:360px;height:auto}
-.shop-copy{min-width:0;padding:clamp(24px,4vw,52px);border-left:1px solid #6ef0ff33;align-self:stretch;display:flex;flex-direction:column;justify-content:center}.shop-copy h3{font:400 clamp(1.8rem,3vw,2.6rem)/1.2 Georgia,serif;color:var(--cyan);margin:20px 0 14px}.shop-copy p{color:#deddd6;line-height:1.7;margin:0 0 28px}.shop-action{display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:.8rem;letter-spacing:2px;color:var(--mint)}.shop-action>span{font-size:24px}.shop-destination{font-size:.75rem;color:#a4a6b2;margin-top:12px;line-height:1.6}
-@media(max-width:700px){.shop-entry{grid-template-columns:1fr}.shop-art img{max-width:250px}.shop-copy{border-left:0;border-top:1px solid #6ef0ff33}}
 :root{--cyan:#6ef0ff;--mint:#b8ffd9;--purple:#e2b3ff;--deep-purple:#9b6bff;--accent:var(--cyan);--accent-rgb:110,240,255;--scroll:0}
 [hidden]{display:none!important}body{padding-bottom:108px}.wordmark{color:var(--cyan)}.wordmark span{color:var(--purple)}.masthead{z-index:6}.light{opacity:.26}.light-left{background:radial-gradient(ellipse,var(--cyan),transparent 66%)}.light-right{background:radial-gradient(ellipse,var(--deep-purple),transparent 66%)}
 .frame{border-color:#e2b3ff20}.frame i{border-color:#6ef0ff66}.frame:before,.frame:after{background:linear-gradient(transparent,var(--mint),transparent)}
@@ -29,3 +24,7 @@ html[data-motion=off] .reveal{opacity:1;translate:none}html[data-motion=off] .re
 @media(max-width:850px){.artist-section{grid-template-columns:1fr}.artist-section .artist-portrait img{position:static;max-width:460px}.artist-section .statement-frame{border-left:0;border-top:1px solid #e2b3ff33}.studio-biography .statement-frame{padding:28px}.artist-section .biography-copy{max-width:none}}
 .presentation{width:100%}.media-frame{width:100%;min-width:0}.editorial-grid>*,.contact-layout>*{min-width:0}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;translate:none}.relic{transform:none}}
+
+/* Worlds uses the same link frames and type scale as Contact. */
+.world-routes{grid-template-columns:repeat(2,minmax(0,1fr))}.world-routes .contact-route{border-color:#6ef0ff55}.world-routes .contact-route h3{color:var(--cyan)}.world-routes .contact-route:hover{background:#6ef0ff0a;border-color:var(--cyan)}
+@media(max-width:700px){.world-routes{grid-template-columns:1fr}}

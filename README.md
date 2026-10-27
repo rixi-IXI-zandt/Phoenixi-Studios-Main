@@ -1,6 +1,6 @@
 # IXI / Phoenixi Studios
 
-Static HTML, CSS and JavaScript, using the supplied IXI artwork, palette and local Ironick font. About contains Rixi's approved Studio and personal biographies. Worlds deliberately retains empty project frames. No database, API keys, paid runtime or installed application dependencies are needed.
+Static HTML, CSS and JavaScript, using the supplied IXI artwork, palette and local Ironick font. About contains the approved Studio biography. Worlds provides links to the Fourthwall shop and Discord community, with no placeholder project frames. No database, API keys, paid runtime or installed application dependencies are needed.
 
 ## Local preview and checks
 
@@ -50,6 +50,6 @@ The same `dist/` can be uploaded to a static host. For Cloudflare Pages use no f
 
 The animated interface requires JavaScript; a no-script email fallback is provided. Layout follows viewport width/height, and fine pointers enable subtle light response. System reduced motion takes precedence over the saved motion toggle. Internal navigation prepares images and fonts beneath the curtain, retains the previous page on failure, and supports browser history. Direct initial visits load like a normal static site. Future remote data must be awaited inside `prepareScene` before revealing the destination.
 
-The existing email, Discord and Instagram destinations remain unchanged. Worlds includes a branded Rixi Shop entry linking to https://rixi-shop.fourthwall.com/ in a new tab. This is a shop link, not an embedded product catalogue or checkout. No contact form, analytics, account system or backend is implied. Check ownership and external-link availability before public launch. The original ZIP and the separately stored source backup are preserved locally, not included in the static build.
+Contact retains email and Instagram. Discord is on Worlds alongside a Rixi Shop entry linking to https://rixi-shop.fourthwall.com/ in a new tab. This is a shop link, not an embedded product catalogue or checkout. No contact form, analytics, account system or backend is implied. Check ownership and external-link availability before public launch. The original ZIP and the separately stored source backup are preserved locally, not included in the static build.
 
 When adding new public assets, add their filenames to the explicit list in `build.mjs` and update the corresponding integrity check. See `HOSTING-CHECK.md` for the latest local verification scope and remaining launch steps.

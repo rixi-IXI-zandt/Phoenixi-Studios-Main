@@ -43,16 +43,13 @@
   motionButton.addEventListener('click',()=>{paused=!paused;try{localStorage.setItem('ixi-motion',paused?'off':'on')}catch{}updateMotion()});
   reduced.addEventListener('change',updateMotion);updateMotion();
   const route=()=>{const name=location.pathname.slice(basePath.length).replace(/\/index\.html$/,'').replace(/^\/+|\/+$/g,'').replace(/\.html$/,'');return Object.hasOwn(scenes,name)?name:'home'};
-  const emptyMedia=(label='IMAGE / FILM')=>`<div class="media-frame" aria-label="Empty ${label.toLowerCase()} frame"><span class="frame-cross" aria-hidden="true">+</span><span class="slot-label">${label}</span><i aria-hidden="true"></i></div>`;
-  const emptyText=()=>'<div class="copy-space" aria-label="Empty text frame"><span class="slot-label">TEXT</span><i></i><i></i><i></i></div>';
   const sections={
     home:()=>'',
-    worlds:()=>`<div class="section-heading"><span class="folio">CATALOGUE</span><h2>Worlds</h2></div>
-      <a class="shop-entry reveal" href="https://rixi-shop.fourthwall.com/" target="_blank" rel="noopener noreferrer" aria-labelledby="shop-title shop-action">
-        <div class="shop-art" aria-hidden="true"><img src="/assets/IXI_Gem_Iceblue_512x296px.png" alt="" width="512" height="296" decoding="async"></div>
-        <div class="shop-copy"><span class="folio">SHOP / FOURTHWALL</span><h3 id="shop-title">Rixi Shop</h3><p>Explore the shop on Fourthwall.</p><span class="shop-action" id="shop-action">VISIT THE SHOP <span aria-hidden="true">↗</span></span><span class="shop-destination">Opens Fourthwall in a new tab</span></div>
-      </a>
-      <div class="world-grid">${['01','02','03'].map((n)=>`<details class="world-slot reveal"><summary>${emptyMedia('PROJECT IMAGE')}<span class="project-caption"><span>Project ${n}</span><span class="expand-label">VIEW FRAME <b aria-hidden="true">+</b></span></span></summary><div class="project-expanded"><h3>Project overview</h3>${emptyText()}<div class="project-specs"><div><span class="slot-label">FORMAT</span><span>—</span></div><div><span class="slot-label">STATUS</span><span>—</span></div></div></div></details>`).join('')}</div>`,
+    worlds:()=>`<div class="section-heading"><span class="folio">EXPLORE</span><h2>Worlds</h2></div>
+      <div class="contact-layout world-routes">
+        <a class="contact-route reveal" href="https://rixi-shop.fourthwall.com/" target="_blank" rel="noopener noreferrer"><span class="folio">01 / SHOP</span><h3>Rixi Shop</h3><span class="contact-address">Visit the Fourthwall shop</span><span class="route-arrow" aria-hidden="true">↗</span></a>
+        <a class="contact-route reveal" href="https://discord.gg/D6hDNAtXMY" target="_blank" rel="noopener noreferrer"><span class="folio">02 / COMMUNITY</span><h3>Discord</h3><span class="contact-address">Join the community</span><span class="route-arrow" aria-hidden="true">↗</span></a>
+      </div>`,
     about:()=>`<div class="section-heading"><span class="folio">STUDIO</span><h2>About</h2></div>
       <section class="studio-biography reveal" aria-labelledby="studio-title"><div class="statement-frame"><span class="folio">01 / STUDIO</span><h3 id="studio-title">Phoenixi Studios</h3><div class="biography-copy">
         <p>Phoenixi Studios began with a simple problem: Rixi has never been very good at keeping one kind of creativity separate from another.</p>
@@ -63,18 +60,8 @@
         <p>Together they form a living body of work concerned with creation, knowledge, identity, transformation, relationship and the unexpected structures connecting seemingly unrelated things.</p>
         <p>Phoenixi Studios is the workshop where those structures are discovered by making them real.</p>
       </div></div></section>
-      <section class="artist-section editorial-grid reveal" aria-labelledby="rixi-title"><figure class="artist-portrait"><img src="/assets/rixi-ixi.png" alt="Illustrated avatar of Rixi Zandt" width="1254" height="1254" decoding="async"></figure><div class="statement-frame"><span class="folio">02 / ARTIST</span><h3 id="rixi-title">Rixi Zandt</h3><div class="biography-copy">
-        <p>Rixi has spent most of her life making things.</p>
-        <p>Sometimes that has meant drawings, photographs, graphics and printed objects. Sometimes businesses, spaces and physical structures. Sometimes characters, worlds and stories. More recently it has meant digital systems, artificial intelligence, symbolic languages, software, architecture and an increasingly impossible-to-categorise thing called IXI.</p>
-        <p>Her route here has never been particularly straight.</p>
-        <p>She studied business, fine art and design, film photography and graphic design; worked in print production and vinyl, teaching and training; built and ran independent businesses; moved into crypto, digital art and NFTs; became involved professionally in community lore and worldbuilding; and eventually began bringing those disciplines together rather than continuing to treat them as separate lives.</p>
-        <p>Rixi is now the founder of Phoenixi Studios and the creator and steward of IXI.</p>
-        <p>She is an artist first, but one whose canvas has become unusually large. An illustration, a book, a piece of software, a garment, a fictional character, an architectural space or an entire system can all be part of the same creative act.</p>
-        <p>Much of her current work explores identity, transformation, memory, knowledge, belonging and becoming—not as distant subjects, but as things lived from inside.</p>
-        <p>IXI grew from that process.</p>
-        <p>So did Rixi.</p>
-      </div></div></section>`,
-    contact:()=>`<div class="section-heading"><span class="folio">DIRECT</span><h2>Contact</h2></div><div class="contact-layout"><a class="contact-route reveal" href="mailto:rixizandt@gmail.com"><span class="folio">01 / EMAIL</span><h3>Get in touch</h3><span class="contact-address">rixizandt@gmail.com</span><span class="route-arrow" aria-hidden="true">↗</span></a><div class="community-routes"><a class="contact-route reveal" href="https://discord.gg/D6hDNAtXMY" target="_blank" rel="noopener noreferrer"><span class="folio">02 / COMMUNITY</span><h3>Discord</h3><span class="route-arrow" aria-hidden="true">↗</span></a><a class="contact-route reveal" href="https://www.instagram.com/rixiphoenixi/" target="_blank" rel="noopener noreferrer"><span class="folio">03 / SOCIAL</span><h3>Instagram</h3><span class="route-arrow" aria-hidden="true">↗</span></a></div></div>`
+`,
+    contact:()=>`<div class="section-heading"><span class="folio">DIRECT</span><h2>Contact</h2></div><div class="contact-layout"><a class="contact-route reveal" href="mailto:rixizandt@gmail.com"><span class="folio">01 / EMAIL</span><h3>Get in touch</h3><span class="contact-address">rixizandt@gmail.com</span><span class="route-arrow" aria-hidden="true">↗</span></a><div class="community-routes"><a class="contact-route reveal" href="https://www.instagram.com/rixiphoenixi/" target="_blank" rel="noopener noreferrer"><span class="folio">02 / SOCIAL</span><h3>Instagram</h3><span class="route-arrow" aria-hidden="true">↗</span></a></div></div>`
   };
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}}),{threshold:0});
   function render(name,announce,preparedHTML){
@@ -83,7 +70,7 @@
     const title=document.querySelector('#scene-title');title.textContent=data.title;title.classList.toggle('sr-only',name==='home');
     document.querySelector('#scene-label').textContent=data.number;
     detail.hidden=name==='home';
-    detail.innerHTML=name==='home'?'':'<a class="scroll-cue" href="#presentation">SCROLL TO '+(name==='worlds'?'CATALOGUE':name==='about'?'STUDIO':'CONNECT')+'<span aria-hidden="true">↓</span></a>';
+    detail.innerHTML=name==='home'?'':'<a class="scroll-cue" href="#presentation">SCROLL TO '+(name==='worlds'?'EXPLORE':name==='about'?'STUDIO':'CONNECT')+'<span aria-hidden="true">↓</span></a>';
     observer.disconnect();presentation.hidden=name==='home';
     presentation.innerHTML=name==='home'?'':(preparedHTML??localizeHTML(sections[name]()))+`<div class="section-end"><a href="#experience" class="back-top">BACK TO TOP ↑</a>${name!=='contact'?`<a href="/${name==='worlds'?'about':'contact'}" data-scene="${name==='worlds'?'about':'contact'}">${name==='worlds'?'ABOUT':'CONTACT'} →</a>`:'<a href="/" data-scene="home">RETURN HOME →</a>'}</div>`;
     presentation.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
