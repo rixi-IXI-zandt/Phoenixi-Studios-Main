@@ -1,5 +1,7 @@
 (() => {
   'use strict';
+  // Older cached page shells may still contain the retired motion button.
+  document.querySelectorAll('.motion-control').forEach(control=>control.remove());
   // Resolve from the loaded script so custom domains and project Pages both work.
   const basePath=new URL('../',document.currentScript.src).pathname;
   const sceneURL=name=>basePath+(name==='home'?'':`${name}/`);
