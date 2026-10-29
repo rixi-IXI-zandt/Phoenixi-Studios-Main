@@ -20,6 +20,11 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
       - run: npm run lint
+      - run: npm ci --prefix library
+      - run: npm run lint --prefix library
+      - run: npm test --prefix library
+      - run: npm run build --prefix library
+      - run: npm run check:independence --prefix library
       - run: npm test
       - run: npm run build
         env:

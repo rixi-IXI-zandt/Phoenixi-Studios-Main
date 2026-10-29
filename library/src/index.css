@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+/* Library controls retain the existing palette and become usable at narrow widths. */
+.library-header{display:flex;align-items:center;gap:.65rem;flex-wrap:wrap;padding:1rem;background:#0b0b0d;border-bottom:1px solid #e2b3ff40;position:sticky;top:0;z-index:40}
+.header-actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-left:auto}
+.library-app button{cursor:pointer}
+.library-header button,.save-status button,.modal-card button,.workspace-content>section button,.workspace-content>div>button,.notes-layout button,.source-callout button,.history-panel button{border:1px solid #e2b3ff50;border-radius:4px;padding:.45rem .7rem;color:#b8ffd9;background:#14141d}
+.library-app input:not([type=checkbox]):not([type=file]),.library-app select,.library-app textarea{background:#0b0b0d;color:#f1f5f9;border:1px solid #e2b3ff50;border-radius:4px;padding:.5rem;max-width:100%}
+.library-app textarea{width:100%;min-width:0}
+.library-app input.library-search{padding-left:2.25rem}
+.library-app label{display:block;margin:.65rem 0;font-size:.85rem}
+.library-app label input:not([type=checkbox]),.library-app label select{display:block;width:100%}
+.library-app h1{font-size:1.6rem;color:#e2b3ff}.library-app h2{font-size:1.2rem;color:#6ef0ff;margin:.7rem 0}.library-app h3{font-weight:600;color:#b8ffd9}
+.library-app :focus-visible{outline:2px solid #6ef0ff;outline-offset:3px}
+.save-status{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;padding:.4rem 1rem;font-size:.75rem;border-bottom:1px solid #e2b3ff20;color:#b8ffd9}
+.error-banner{padding:1rem;background:#401a2d;color:#fff}.error-banner button{margin-left:1rem;text-decoration:underline}
+.workspace{display:flex;align-items:stretch;min-height:calc(100vh - 130px)}.navigation{flex:0 0 256px}.navigation aside{height:100%;width:256px}.workspace-content{flex:1;min-width:0;overflow-wrap:anywhere}.mobile-menu{display:none}
+.modal-overlay{position:fixed;inset:0;z-index:100;background:#050509dd;display:flex;align-items:center;justify-content:center;padding:1rem}
+.modal-card{background:#14141d;border:1px solid #e2b3ff70;padding:1.5rem;max-width:640px;width:100%;max-height:90dvh;overflow:auto;box-shadow:0 20px 80px #000}.modal-card button{margin:.4rem .4rem .4rem 0}.modal-card p{font-size:.85rem;margin:.8rem 0}.modal-card [role=alert]{color:#ffb4c4}
+.notes-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:1rem}.notes-layout nav{display:flex;flex-direction:column;gap:.5rem}.notes-layout nav .selected{border-color:#6ef0ff}.notes-layout section>input{width:100%;margin-bottom:.7rem}
+.source-callout{border-left:2px solid #6ef0ff;padding:1rem;margin:1rem 0}blockquote{border-left:2px solid #e2b3ff;padding:.5rem 1rem;white-space:pre-wrap;margin:.6rem 0}
+.history-panel{position:fixed;right:1rem;top:100px;z-index:70;max-height:75vh;overflow:auto;background:#14141d;border:1px solid #e2b3ff;padding:1rem;display:flex;flex-direction:column;gap:.5rem;min-width:220px}
+@media(max-width:900px){.header-actions{margin-left:0;width:100%}.header-actions kbd{display:none}.mobile-menu{display:block}.navigation{display:none}.navigation-open{display:block;position:fixed;left:0;top:150px;bottom:0;z-index:60;overflow:auto;box-shadow:10px 0 40px #000}.workspace-content{width:100%}.library-header{position:relative}.notes-layout{grid-template-columns:1fr}.notes-layout nav{flex-direction:row;overflow:auto}.workspace-content .p-6{padding:1rem}.workspace-content .p-16{padding:2rem 1rem}.workspace-content .flex.items-center.justify-between{flex-wrap:wrap;gap:.6rem}.workspace-content input{min-width:0}.workspace-content [contenteditable]{min-height:40vh}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+@theme {
+  --font-sans: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-artdeco: "Cinzel", "Montserrat", serif;
+
+  --color-px-cyan: #6EF0FF;
+  --color-px-mint: #B8FFD9;
+  --color-px-lavender: #E2B3FF;
+  --color-px-periwinkle: #9B6BFF;
+  --color-px-obsidian: #0B0B0D;
+  --color-px-surface: #121217;
+  --color-px-card: #181822;
+  --color-px-border: #2A2A3A;
+}
+
+@layer utilities {
+  /* Art Deco Chamfered Corner clip path */
+  .artdeco-chamfer {
+    clip-path: polygon(
+      0 10px, 10px 0,
+      calc(100% - 10px) 0, 100% 10px,
+      100% calc(100% - 10px), calc(100% - 10px) 100%,
+      10px 100%, 0 calc(100% - 10px)
+    );
+  }
+
+  .artdeco-chamfer-sm {
+    clip-path: polygon(
+      0 5px, 5px 0,
+      calc(100% - 5px) 0, 100% 5px,
+      100% calc(100% - 5px), calc(100% - 5px) 100%,
+      5px 100%, 0 calc(100% - 5px)
+    );
+  }
+
+  /* Art Deco Geometric Card with pastel macaron hairline border */
+  .artdeco-card {
+    background-color: #14141D;
+    border: 1px solid rgba(226, 179, 255, 0.18);
+    box-shadow: 0 8px 32px -4px rgba(11, 11, 13, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .artdeco-card:hover {
+    border-color: rgba(110, 240, 255, 0.35);
+    box-shadow: 0 12px 36px -4px rgba(110, 240, 255, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  }
+
+  /* Art Deco Glow Effects */
+  .glow-cyan {
+    box-shadow: 0 0 20px -2px rgba(110, 240, 255, 0.3);
+  }
+
+  .glow-lavender {
+    box-shadow: 0 0 20px -2px rgba(226, 179, 255, 0.3);
+  }
+
+  .glow-mint {
+    box-shadow: 0 0 20px -2px rgba(184, 255, 217, 0.3);
+  }
+
+  .glow-periwinkle {
+    box-shadow: 0 0 20px -2px rgba(155, 107, 255, 0.3);
+  }
+
+  /* Macaron Gradient Text */
+  .text-macaron-gradient {
+    background: linear-gradient(135deg, #6EF0FF 0%, #E2B3FF 50%, #B8FFD9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-macaron-cyan-lavender {
+    background: linear-gradient(135deg, #6EF0FF 0%, #E2B3FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Art Deco Stepped Corner Frames */
+  .artdeco-frame {
+    position: relative;
+  }
+
+  .artdeco-frame::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    border: 1px solid rgba(226, 179, 255, 0.25);
+    pointer-events: none;
+  }
+
+  /* Art Deco Golden / Pastel Linear Rules */
+  .artdeco-rule {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(110, 240, 255, 0.4) 25%, rgba(226, 179, 255, 0.6) 50%, rgba(184, 255, 217, 0.4) 75%, transparent 100%);
+  }
+}
+
+/* Custom Scrollbar for Art Deco Theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B0B0D;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2A2A3D;
+  border-radius: 3px;
+  border: 1px solid rgba(226, 179, 255, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9B6BFF;
+}
+

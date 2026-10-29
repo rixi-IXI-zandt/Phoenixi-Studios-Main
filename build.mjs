@@ -1,4 +1,4 @@
-import { mkdir, copyFile, readFile, writeFile, rm, lstat } from 'node:fs/promises';
+import { mkdir, copyFile, readFile, writeFile, rm, lstat, cp } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -31,5 +31,7 @@ for (const page of ['about', 'worlds', 'contact']) {
   await writeFile(new URL(`${page}/index.html`, output), shell);
 }
 await writeFile(new URL('.nojekyll', output), '');
+// Library contains application code only; browser writing never enters this build.
+await cp(new URL('library/dist/', root), new URL('library/', output), {recursive:true});
 await writeFile(new URL('404.html', output), `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Page not found — IXI</title><link rel="stylesheet" href="${base}css/global.css"><style>h1{font-family:Ironick,serif}body{background:#090b0e;color:#e2b3ff;font:1.1rem/1.8 Arial,Helvetica,sans-serif;padding:12vh 8vw}a{color:#6ef0ff}</style><h1>Page not found</h1><p>This address does not lead to a page.</p><a href="${base}">Return to IXI</a></html>`);
 console.log(`IXI static build complete. Base path: ${base}`);

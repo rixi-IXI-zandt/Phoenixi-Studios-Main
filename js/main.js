@@ -36,7 +36,7 @@
   const sections={
     home:()=>'',
     worlds:()=>`<h2 class="sr-only">Explore Worlds</h2>
-      <nav class="destination-list" aria-label="Shop and community">
+      <nav class="destination-list" aria-label="Shop, community and Library">
         <a class="world-destination destination fine-rule reveal" href="https://shop.rixi.info/" target="_blank" rel="noopener noreferrer">
           <span class="destination-context">FOURTHWALL</span>
           <span class="destination-title">RIXI SHOP</span>
@@ -48,6 +48,12 @@
           <span class="destination-title">DISCORD</span>
           <span class="destination-action">JOIN THE CONVERSATION <span aria-hidden="true">↗</span></span>
           <span class="sr-only">Opens in a new tab</span>
+        </a>
+        <a class="world-destination destination library-destination fine-rule reveal" href="/library/">
+          <span class="destination-context">WRITE &amp; WORLDBUILD</span>
+          <span class="destination-title">PHOENIXI LIBRARY</span>
+          <span class="destination-action">OPEN THE LIBRARY <span aria-hidden="true">↗</span></span>
+          <span class="destination-context">SAVED IN YOUR BROWSER · EXPORT BACKUPS</span>
         </a>
       </nav>`,
     about:()=>`<section class="studio-biography reveal" aria-labelledby="studio-title">
