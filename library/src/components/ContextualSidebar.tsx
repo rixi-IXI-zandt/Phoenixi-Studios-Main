@@ -37,10 +37,10 @@ export const ContextualSidebar: React.FC<ContextualSidebarProps> = ({
   if (!isOpen) return null;
 
   return (
-    <aside aria-label="Bookmarks" className="w-72 bg-[#14141D] border-l border-[#E2B3FF]/30 text-slate-200 flex flex-col h-[calc(100vh-4rem)] fixed right-0 top-16 z-50 select-none text-xs artdeco-frame">
+    <aside aria-label="Bookmarks" className="w-72 bg-ixi-surface border-l border-[#E2B3FF]/30 text-ixi-paper flex flex-col h-[calc(100vh-4rem)] fixed right-0 top-16 z-50 select-none text-xs artdeco-frame">
       {/* Header */}
-      <div className="p-3 border-b border-[#E2B3FF]/20 flex items-center justify-between bg-[#0B0B0D]/80">
-        <div className="flex items-center gap-2 font-bold text-slate-200 font-artdeco">
+      <div className="p-3 border-b border-[#E2B3FF]/20 flex items-center justify-between bg-ixi-ink/80">
+        <div className="flex items-center gap-2 font-bold text-ixi-paper font-artdeco">
           <IXIMark className="scale-75" />
           {activeTab === 'bookmarks' ? (
             <>
@@ -56,7 +56,7 @@ export const ContextualSidebar: React.FC<ContextualSidebarProps> = ({
         </div>
         <button
           onClick={onClose}
-          className="p-1 rounded-md text-slate-400 hover:text-white hover:bg-[#1C1C2A] transition-colors artdeco-chamfer-sm"
+          className="p-1 rounded-md text-ixi-muted hover:text-white hover:bg-[#1C1C2A] transition-colors artdeco-chamfer-sm"
         >
           <X className="w-4 h-4" />
         </button>
@@ -66,14 +66,14 @@ export const ContextualSidebar: React.FC<ContextualSidebarProps> = ({
       <div className="p-3 overflow-y-auto space-y-2 flex-1">
         {activeTab === 'bookmarks' ? (
           (bookmarks || []).length === 0 ? (
-            <div className="text-center py-10 text-slate-400 text-xs">
+            <div className="text-center py-10 text-ixi-muted text-xs">
               No pinned bookmarks yet. Open an entity and choose Pin Bookmark.
             </div>
           ) : (
             (bookmarks || []).map((b) => (
               <div
                 key={b.id}
-                className="group flex items-center justify-between p-2.5 rounded-lg bg-[#0B0B0D]/60 hover:bg-[#0B0B0D] border border-[#B8FFD9]/30 transition-colors artdeco-chamfer-sm"
+                className="group flex items-center justify-between p-2.5 rounded-lg bg-ixi-ink/60 hover:bg-ixi-ink border border-[#B8FFD9]/30 transition-colors artdeco-chamfer-sm"
               >
                 <button
                   onClick={() => onSelectBookmark(b)}
@@ -81,18 +81,18 @@ export const ContextualSidebar: React.FC<ContextualSidebarProps> = ({
                 >
                   <Bookmark className="w-3.5 h-3.5 text-[#B8FFD9] shrink-0" />
                   <div>
-                    <div className="font-semibold text-slate-200 group-hover:text-[#B8FFD9] line-clamp-1">
+                    <div className="font-semibold text-ixi-paper group-hover:text-[#B8FFD9] line-clamp-1">
                       {b.title}
                     </div>
                     {b.subtitle && (
-                      <div className="text-[10px] text-slate-400 capitalize">{b.subtitle}</div>
+                      <div className="text-[10px] text-ixi-muted capitalize">{b.subtitle}</div>
                     )}
                   </div>
                 </button>
 
                 <button
                   onClick={() => onRemoveBookmark(b.targetId)}
-                  className="p-1 text-slate-500 hover:text-rose-400 opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="p-1 text-ixi-muted hover:text-rose-400 opacity-0 group-hover:opacity-100 transition-opacity"
                   title="Remove Bookmark"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
@@ -101,7 +101,7 @@ export const ContextualSidebar: React.FC<ContextualSidebarProps> = ({
             ))
           )
         ) : (history || []).length === 0 ? (
-          <div className="text-center py-10 text-slate-400 text-xs">
+          <div className="text-center py-10 text-ixi-muted text-xs">
             No history recorded yet. As you navigate entities and stories, your recent view history will appear here.
           </div>
         ) : (
@@ -109,18 +109,18 @@ export const ContextualSidebar: React.FC<ContextualSidebarProps> = ({
             <button
               key={`${h.targetId}-${h.timestamp}-${i}`}
               onClick={() => onSelectHistory(h)}
-              className="w-full text-left p-2.5 rounded-lg bg-[#0B0B0D]/60 hover:bg-[#0B0B0D] border border-[#9B6BFF]/30 flex items-center justify-between group transition-colors artdeco-chamfer-sm"
+              className="w-full text-left p-2.5 rounded-lg bg-ixi-ink/60 hover:bg-ixi-ink border border-[#9B6BFF]/30 flex items-center justify-between group transition-colors artdeco-chamfer-sm"
             >
               <div className="flex items-center gap-2">
                 <History className="w-3.5 h-3.5 text-[#9B6BFF] shrink-0" />
                 <div>
-                  <div className="font-semibold text-slate-200 group-hover:text-[#9B6BFF] line-clamp-1">
+                  <div className="font-semibold text-ixi-paper group-hover:text-[#9B6BFF] line-clamp-1">
                     {h.title}
                   </div>
-                  <div className="text-[10px] text-slate-400 capitalize">{h.type}</div>
+                  <div className="text-[10px] text-ixi-muted capitalize">{h.type}</div>
                 </div>
               </div>
-              <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-slate-300" />
+              <ChevronRight className="w-3.5 h-3.5 text-ixi-muted group-hover:text-ixi-paper" />
             </button>
           ))
         )}

@@ -65,8 +65,8 @@ export const RelationshipGraph: React.FC<RelationshipGraphProps> = ({ entities, 
   const selectedNode = nodes.find((n) => n.id === selectedNodeId);
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-4 text-slate-100 select-none">
-      <div className="bg-[#14141D] p-5 rounded-xl border border-[#E2B3FF]/30 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4 artdeco-frame">
+    <div className="p-6 max-w-7xl mx-auto space-y-4 text-ixi-paper select-none">
+      <div className="bg-ixi-surface p-5 rounded-xl border border-[#E2B3FF]/30 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4 artdeco-frame">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <IXIMark />
@@ -75,51 +75,51 @@ export const RelationshipGraph: React.FC<RelationshipGraphProps> = ({ entities, 
               <span>Interactive Visual Relationship Graph</span>
             </h2>
           </div>
-          <p className="text-xs text-slate-300">
+          <p className="text-xs text-ixi-paper">
             Visual network showing explicit database relationships between world entities.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           {/* Filter by Type */}
-          <div className="flex items-center gap-2 bg-[#0B0B0D] px-3 py-1.5 rounded-md border border-[#E2B3FF]/30 artdeco-chamfer-sm">
+          <div className="flex items-center gap-2 bg-ixi-ink px-3 py-1.5 rounded-md border border-[#E2B3FF]/30 artdeco-chamfer-sm">
             <Filter className="w-3.5 h-3.5 text-[#6EF0FF]" />
             <select
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
-              className="bg-transparent text-xs text-slate-200 focus:outline-none cursor-pointer"
+              className="bg-transparent text-xs text-ixi-paper focus:outline-none cursor-pointer"
             >
-              <option value="all" className="bg-[#14141D]">All Entity Types</option>
-              <option value="character" className="bg-[#14141D]">Characters</option>
-              <option value="organization" className="bg-[#14141D]">Organizations</option>
-              <option value="location" className="bg-[#14141D]">Locations</option>
-              <option value="culture" className="bg-[#14141D]">Cultures</option>
-              <option value="species" className="bg-[#14141D]">Species</option>
-              <option value="discovery" className="bg-[#14141D]">Discoveries</option>
-              <option value="item" className="bg-[#14141D]">Items</option>
+              <option value="all" className="bg-ixi-surface">All Entity Types</option>
+              <option value="character" className="bg-ixi-surface">Characters</option>
+              <option value="organization" className="bg-ixi-surface">Organizations</option>
+              <option value="location" className="bg-ixi-surface">Locations</option>
+              <option value="culture" className="bg-ixi-surface">Cultures</option>
+              <option value="species" className="bg-ixi-surface">Species</option>
+              <option value="discovery" className="bg-ixi-surface">Discoveries</option>
+              <option value="item" className="bg-ixi-surface">Items</option>
             </select>
           </div>
 
           {/* Zoom controls */}
-          <div className="flex items-center gap-1 bg-[#0B0B0D] p-1 rounded-md border border-[#E2B3FF]/30 artdeco-chamfer-sm">
+          <div className="flex items-center gap-1 bg-ixi-ink p-1 rounded-md border border-[#E2B3FF]/30 artdeco-chamfer-sm">
             <button
               onClick={() => setZoomLevel((z) => Math.max(0.6, z - 0.2))}
-              className="p-1 text-slate-300 hover:text-white"
+              className="p-1 text-ixi-paper hover:text-white"
             >
               <ZoomOut className="w-4 h-4 text-[#6EF0FF]" />
             </button>
-            <span className="text-[10px] text-slate-300 font-mono w-8 text-center">
+            <span className="text-[10px] text-ixi-paper font-mono w-8 text-center">
               {Math.round(zoomLevel * 100)}%
             </span>
             <button
               onClick={() => setZoomLevel((z) => Math.min(2, z + 0.2))}
-              className="p-1 text-slate-300 hover:text-white"
+              className="p-1 text-ixi-paper hover:text-white"
             >
               <ZoomIn className="w-4 h-4 text-[#6EF0FF]" />
             </button>
             <button
               onClick={() => setZoomLevel(1)}
-              className="p-1 text-slate-300 hover:text-white ml-1 border-l border-slate-700 pl-1"
+              className="p-1 text-ixi-paper hover:text-white ml-1 border-l border-ixi-line pl-1"
             >
               <RefreshCw className="w-3.5 h-3.5 text-[#B8FFD9]" />
             </button>
@@ -130,7 +130,7 @@ export const RelationshipGraph: React.FC<RelationshipGraphProps> = ({ entities, 
       {/* SVG Canvas Container */}
       <div className="artdeco-card rounded-xl shadow-2xl relative overflow-hidden min-h-[600px] flex items-center justify-center">
         {displayEntities.length === 0 ? (
-          <div className="text-center py-20 text-slate-500 text-xs">
+          <div className="text-center py-20 text-ixi-muted text-xs">
             No entities in database to plot on graph.
           </div>
         ) : (
@@ -237,18 +237,18 @@ export const RelationshipGraph: React.FC<RelationshipGraphProps> = ({ entities, 
 
         {/* Floating Detail Inspector */}
         {selectedNode && (
-          <div className="absolute bottom-4 right-4 bg-[#14141D] border border-[#6EF0FF]/50 rounded-xl p-4 w-72 backdrop-blur shadow-2xl text-slate-100 z-10 space-y-2 artdeco-chamfer-sm">
+          <div className="absolute bottom-4 right-4 bg-ixi-surface border border-[#6EF0FF]/50 rounded-xl p-4 w-72 backdrop-blur shadow-2xl text-ixi-paper z-10 space-y-2 artdeco-chamfer-sm">
             <div className="flex items-center justify-between border-b border-[#E2B3FF]/20 pb-2">
               <span className="text-xs font-bold uppercase text-[#6EF0FF] font-artdeco">{selectedNode.type}</span>
               <button
                 onClick={() => setSelectedNodeId(null)}
-                className="text-slate-400 hover:text-white text-xs"
+                className="text-ixi-muted hover:text-white text-xs"
               >
                 ×
               </button>
             </div>
             <h4 className="font-bold text-base text-white">{selectedNode.name}</h4>
-            <p className="text-xs text-slate-300 line-clamp-3">{selectedNode.description || 'No description.'}</p>
+            <p className="text-xs text-ixi-paper line-clamp-3">{selectedNode.description || 'No description.'}</p>
             <div className="text-[11px] text-[#B8FFD9]">
               {selectedNode.relationships.length} explicit relationships
             </div>

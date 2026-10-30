@@ -23,3 +23,7 @@ There are no approved tiers, perks, qualifying collections/templates, or access 
 Before activating access, implement trusted server authentication, signed wallet proof, server-side membership verification/webhook handling, expiry/revocation, and protected delivery. Client-side flags cannot enforce paid or private access. WAX evidence must match the approved network, account, collection/schema/template and fresh ownership; failures deny access. Do not embed credentials in this static app.
 
 Research references: [WharfKit login](https://wharfkit.com/docs/session-kit/login), [WAX WharfKit](https://docs.wax.io/build/developing-apps/sdks/wharfkit/), [AtomicAssets API](https://github.com/atomicassets/atomicassets-api), [Fourthwall FAQ](https://fourthwall.com/faq). These establish integration options, not approved Phoenixi perks.
+
+## IXI interface
+
+Uses the supplied Ironick display face, local Josefin Sans for reading, the Studio crest and the exact IXI palette. Controls keep interface typography. Navigation uses the Studio curtain choreography (desktop 1400 ms close, 400 ms settle, 2200 ms reveal; mobile 520 ms close and 900 ms reveal). System reduced-motion preferences are respected, with no in-app motion toggle. The editor supports Ctrl/Cmd+S to save and Escape to leave focus mode. Storage formats and membership/WAX configuration are unchanged by the visual migration.

@@ -75,10 +75,10 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-[#0B0B0D]/80 backdrop-blur-md z-50 flex items-start justify-center pt-20 p-4">
-      <div className="bg-[#14141D] border border-[#E2B3FF]/30 rounded-xl w-full max-w-2xl text-slate-100 shadow-2xl overflow-hidden flex flex-col max-h-[80vh] artdeco-frame">
+    <div className="fixed inset-0 bg-ixi-ink/80 backdrop-blur-md z-50 flex items-start justify-center pt-20 p-4">
+      <div className="bg-ixi-surface border border-[#E2B3FF]/30 rounded-xl w-full max-w-2xl text-ixi-paper shadow-2xl overflow-hidden flex flex-col max-h-[80vh] artdeco-frame">
         {/* Search Input Bar */}
-        <div className="p-4 border-b border-[#E2B3FF]/20 flex items-center gap-3 bg-[#14141D]/90">
+        <div className="p-4 border-b border-[#E2B3FF]/20 flex items-center gap-3 bg-ixi-surface/90">
           <IXIMark className="scale-75" />
           <Search className="w-5 h-5 text-[#6EF0FF] shrink-0" />
           <input
@@ -87,16 +87,16 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
             placeholder="Search entities, stories, notes or tags (#Faction #Military)..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full bg-transparent text-sm text-slate-100 placeholder-slate-500 focus:outline-none font-sans"
+            className="w-full bg-transparent text-sm text-ixi-paper placeholder-ixi-muted focus:outline-none font-sans"
           />
           {query && (
-            <button onClick={() => setQuery('')} className="p-1 text-slate-400 hover:text-white">
+            <button onClick={() => setQuery('')} className="p-1 text-ixi-muted hover:text-white">
               <X className="w-4 h-4" />
             </button>
           )}
           <button
             onClick={onClose}
-            className="px-2.5 py-1 rounded-md bg-[#0B0B0D] border border-[#E2B3FF]/30 text-[#E2B3FF] hover:text-white text-xs font-mono artdeco-chamfer-sm"
+            className="px-2.5 py-1 rounded-md bg-ixi-ink border border-[#E2B3FF]/30 text-[#E2B3FF] hover:text-white text-xs font-mono artdeco-chamfer-sm"
           >
             ESC
           </button>
@@ -105,7 +105,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
         {/* Results List */}
         <div className="p-4 overflow-y-auto space-y-4 divide-y divide-[#E2B3FF]/10">
           {!query.trim() ? (
-            <div className="text-center py-8 text-slate-400 text-xs">
+            <div className="text-center py-8 text-ixi-muted text-xs">
               Type keywords or tag filters like <span className="text-[#6EF0FF]">#Faction #Military</span> to search across the entire project database.
             </div>
           ) : (
@@ -125,17 +125,17 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
                           onSelectEntity(e.id);
                           onClose();
                         }}
-                        className="w-full text-left p-2.5 rounded-lg bg-[#0B0B0D]/60 hover:bg-[#0B0B0D] border border-[#E2B3FF]/20 flex items-center justify-between group transition-colors artdeco-chamfer-sm"
+                        className="w-full text-left p-2.5 rounded-lg bg-ixi-ink/60 hover:bg-ixi-ink border border-[#E2B3FF]/20 flex items-center justify-between group transition-colors artdeco-chamfer-sm"
                       >
                         <div>
-                          <div className="text-sm font-semibold text-slate-200 group-hover:text-[#6EF0FF] flex items-center gap-2">
+                          <div className="text-sm font-semibold text-ixi-paper group-hover:text-[#6EF0FF] flex items-center gap-2">
                             <span>{e.name}</span>
-                            <span className="text-[10px] uppercase font-bold text-[#E2B3FF] bg-[#14141D] px-1.5 py-0.5 rounded border border-[#E2B3FF]/30">
+                            <span className="text-[10px] uppercase font-bold text-[#E2B3FF] bg-ixi-surface px-1.5 py-0.5 rounded border border-[#E2B3FF]/30">
                               {e.type}
                             </span>
                           </div>
                           {e.description && (
-                            <p className="text-xs text-slate-400 line-clamp-1 mt-0.5">
+                            <p className="text-xs text-ixi-muted line-clamp-1 mt-0.5">
                               {e.description}
                             </p>
                           )}
@@ -145,7 +145,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
                             {(e.tags || []).slice(0, 3).map((t) => (
                               <span
                                 key={t}
-                                className="text-[10px] bg-[#14141D] text-[#B8FFD9] px-1.5 py-0.5 rounded border border-[#B8FFD9]/30"
+                                className="text-[10px] bg-ixi-surface text-[#B8FFD9] px-1.5 py-0.5 rounded border border-[#B8FFD9]/30"
                               >
                                 #{t}
                               </span>
@@ -173,13 +173,13 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
                           onSelectStory?.(s.id);
                           onClose();
                         }}
-                        className="w-full text-left p-2.5 rounded-lg bg-[#0B0B0D]/60 hover:bg-[#0B0B0D] border border-[#B8FFD9]/20 flex items-center justify-between group transition-colors artdeco-chamfer-sm"
+                        className="w-full text-left p-2.5 rounded-lg bg-ixi-ink/60 hover:bg-ixi-ink border border-[#B8FFD9]/20 flex items-center justify-between group transition-colors artdeco-chamfer-sm"
                       >
                         <div>
-                          <div className="text-sm font-semibold text-slate-200 group-hover:text-[#B8FFD9]">
+                          <div className="text-sm font-semibold text-ixi-paper group-hover:text-[#B8FFD9]">
                             {s.title}
                           </div>
-                          <p className="text-xs text-slate-400 line-clamp-1 mt-0.5">
+                          <p className="text-xs text-ixi-muted line-clamp-1 mt-0.5">
                             {s.description || 'No description'}
                           </p>
                         </div>
@@ -204,13 +204,13 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
                           onSelectNote?.(n.id);
                           onClose();
                         }}
-                        className="w-full text-left p-2.5 rounded-lg bg-[#0B0B0D]/60 hover:bg-[#0B0B0D] border border-[#E2B3FF]/20 flex items-center justify-between group transition-colors artdeco-chamfer-sm"
+                        className="w-full text-left p-2.5 rounded-lg bg-ixi-ink/60 hover:bg-ixi-ink border border-[#E2B3FF]/20 flex items-center justify-between group transition-colors artdeco-chamfer-sm"
                       >
                         <div>
-                          <div className="text-sm font-semibold text-slate-200 group-hover:text-[#E2B3FF]">
+                          <div className="text-sm font-semibold text-ixi-paper group-hover:text-[#E2B3FF]">
                             {n.title}
                           </div>
-                          <p className="text-xs text-slate-400 line-clamp-1 mt-0.5">
+                          <p className="text-xs text-ixi-muted line-clamp-1 mt-0.5">
                             {n.content.slice(0, 100)}...
                           </p>
                         </div>
@@ -223,7 +223,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
               {searchResults.entities.length === 0 &&
                 searchResults.stories.length === 0 &&
                 searchResults.notes.length === 0 && (
-                  <div className="text-center py-8 text-slate-500 text-xs">
+                  <div className="text-center py-8 text-ixi-muted text-xs">
                     No matching entities, stories, or notes found for "{query}".
                   </div>
                 )}

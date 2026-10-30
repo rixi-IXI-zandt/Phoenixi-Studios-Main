@@ -48,8 +48,8 @@ export const PlotThreadsManager: React.FC<PlotThreadsManagerProps> = ({
   };
 
   return (
-    <div className="p-6 max-w-5xl mx-auto space-y-6 text-slate-100">
-      <div className="bg-[#14141D] p-5 rounded-xl border border-[#E2B3FF]/30 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4 artdeco-frame">
+    <div className="p-6 max-w-5xl mx-auto space-y-6 text-ixi-paper">
+      <div className="bg-ixi-surface p-5 rounded-xl border border-[#E2B3FF]/30 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4 artdeco-frame">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <IXIMark />
@@ -58,7 +58,7 @@ export const PlotThreadsManager: React.FC<PlotThreadsManagerProps> = ({
               <span>Plotlines & Thread Resolution Tracker</span>
             </h2>
           </div>
-          <p className="text-xs text-slate-300">
+          <p className="text-xs text-ixi-paper">
             Track unresolved plot points across story chapters and scenes without making up fictional conclusions.
           </p>
         </div>
@@ -73,7 +73,7 @@ export const PlotThreadsManager: React.FC<PlotThreadsManagerProps> = ({
       </div>
 
       {(plotThreads || []).length === 0 ? (
-        <div className="artdeco-card rounded-xl p-12 text-center text-slate-400 text-xs">
+        <div className="artdeco-card rounded-xl p-12 text-center text-ixi-muted text-xs">
           No plot threads created yet. Track narrative promises, mysteries, and unresolved story arcs here.
         </div>
       ) : (
@@ -85,7 +85,7 @@ export const PlotThreadsManager: React.FC<PlotThreadsManagerProps> = ({
             >
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <h3 className="font-bold text-slate-100 text-base font-sans">{pt.title}<button className="ml-4" onClick={()=>onDelete(pt.id)}>Delete Thread</button></h3>
+                  <h3 className="font-bold text-ixi-paper text-base font-sans">{pt.title}<button className="ml-4" onClick={()=>onDelete(pt.id)}>Delete Thread</button></h3>
                   <span
                     className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${
                       pt.status === 'unresolved'
@@ -98,7 +98,7 @@ export const PlotThreadsManager: React.FC<PlotThreadsManagerProps> = ({
                     {pt.status === 'unresolved' ? 'Unresolved' : pt.status}
                   </span>
                 </div>
-                <p className="text-xs text-slate-300">{pt.description || 'No description provided.'}</p>
+                <p className="text-xs text-ixi-paper">{pt.description || 'No description provided.'}</p>
               </div>
 
               <div className="flex items-center gap-1.5 shrink-0">
@@ -107,7 +107,7 @@ export const PlotThreadsManager: React.FC<PlotThreadsManagerProps> = ({
                   className={`px-3 py-1 rounded-md text-xs font-semibold border transition-all artdeco-chamfer-sm ${
                     pt.status === 'unresolved'
                       ? 'bg-rose-500 text-white border-rose-400'
-                      : 'bg-[#0B0B0D] text-slate-400 border-slate-700 hover:text-white'
+                      : 'bg-ixi-ink text-ixi-muted border-ixi-line hover:text-white'
                   }`}
                 >
                   Unresolved
@@ -117,7 +117,7 @@ export const PlotThreadsManager: React.FC<PlotThreadsManagerProps> = ({
                   className={`px-3 py-1 rounded-md text-xs font-semibold border transition-all artdeco-chamfer-sm ${
                     pt.status === 'active'
                       ? 'bg-[#6EF0FF] text-[#0B0B0D] border-[#6EF0FF]'
-                      : 'bg-[#0B0B0D] text-slate-400 border-slate-700 hover:text-white'
+                      : 'bg-ixi-ink text-ixi-muted border-ixi-line hover:text-white'
                   }`}
                 >
                   Active
@@ -127,7 +127,7 @@ export const PlotThreadsManager: React.FC<PlotThreadsManagerProps> = ({
                   className={`px-3 py-1 rounded-md text-xs font-semibold border transition-all artdeco-chamfer-sm ${
                     pt.status === 'resolved'
                       ? 'bg-[#B8FFD9] text-[#0B0B0D] border-[#B8FFD9]'
-                      : 'bg-[#0B0B0D] text-slate-400 border-slate-700 hover:text-white'
+                      : 'bg-ixi-ink text-ixi-muted border-ixi-line hover:text-white'
                   }`}
                 >
                   Resolved
@@ -141,7 +141,7 @@ export const PlotThreadsManager: React.FC<PlotThreadsManagerProps> = ({
       {/* New Plot Thread Modal */}
       {showAddModal && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
-          <div className="bg-[#14141D] border border-[#6EF0FF]/40 rounded-xl p-6 w-full max-w-md text-slate-100 shadow-2xl space-y-4 artdeco-frame">
+          <div className="bg-ixi-surface border border-[#6EF0FF]/40 rounded-xl p-6 w-full max-w-md text-ixi-paper shadow-2xl space-y-4 artdeco-frame">
             <h3 className="text-base font-bold text-[#6EF0FF] flex items-center gap-2 font-artdeco">
               <GitMerge className="w-5 h-5 text-[#6EF0FF]" />
               Create Plot Thread
@@ -157,7 +157,7 @@ export const PlotThreadsManager: React.FC<PlotThreadsManagerProps> = ({
                   placeholder="e.g. Identity of the Ash Keeper"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full bg-[#0B0B0D] border border-[#E2B3FF]/30 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#6EF0FF]"
+                  className="w-full bg-ixi-ink border border-[#E2B3FF]/30 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#6EF0FF]"
                 />
               </div>
 
@@ -170,7 +170,7 @@ export const PlotThreadsManager: React.FC<PlotThreadsManagerProps> = ({
                   placeholder="Mystery details or narrative setup..."
                   value={desc}
                   onChange={(e) => setDesc(e.target.value)}
-                  className="w-full bg-[#0B0B0D] border border-[#E2B3FF]/30 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-[#6EF0FF]"
+                  className="w-full bg-ixi-ink border border-[#E2B3FF]/30 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-[#6EF0FF]"
                 />
               </div>
 
@@ -179,7 +179,7 @@ export const PlotThreadsManager: React.FC<PlotThreadsManagerProps> = ({
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value as any)}
-                  className="w-full bg-[#0B0B0D] border border-[#6EF0FF]/30 rounded-lg px-3 py-2 text-xs text-slate-200"
+                  className="w-full bg-ixi-ink border border-[#6EF0FF]/30 rounded-lg px-3 py-2 text-xs text-ixi-paper"
                 >
                   <option value="unresolved">Unresolved</option>
                   <option value="active">Active Development</option>
@@ -191,7 +191,7 @@ export const PlotThreadsManager: React.FC<PlotThreadsManagerProps> = ({
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2 rounded-md bg-[#0B0B0D] text-slate-300 text-xs font-semibold border border-slate-700 hover:bg-[#181822]"
+                  className="px-4 py-2 rounded-md bg-ixi-ink text-ixi-paper text-xs font-semibold border border-ixi-line hover:bg-ixi-surface"
                 >
                   Cancel
                 </button>

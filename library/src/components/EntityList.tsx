@@ -55,20 +55,20 @@ export const EntityList: React.FC<EntityListProps> = ({
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6 text-slate-100">
+    <div className="p-6 max-w-7xl mx-auto space-y-6 text-ixi-paper">
       {/* Top Title & Add Button */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#14141D] p-5 rounded-xl border border-[#E2B3FF]/30 shadow-xl artdeco-frame">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-ixi-surface p-5 rounded-xl border border-[#E2B3FF]/30 shadow-xl artdeco-frame">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <IXIMark />
             <h2 className="text-xl font-black text-white font-artdeco tracking-tight flex items-center gap-2">
               <span>{getTypeTitle(entityType)}</span>
-              <span className="text-xs font-semibold bg-[#0B0B0D] text-[#6EF0FF] px-2.5 py-1 rounded-md border border-[#6EF0FF]/30">
+              <span className="text-xs font-semibold bg-ixi-ink text-[#6EF0FF] px-2.5 py-1 rounded-md border border-[#6EF0FF]/30">
                 {filteredEntities.length}
               </span>
             </h2>
           </div>
-          <p className="text-xs text-slate-300">
+          <p className="text-xs text-ixi-paper">
             Structured world database records for {getTypeTitle(entityType).toLowerCase()}.
           </p>
         </div>
@@ -91,7 +91,7 @@ export const EntityList: React.FC<EntityListProps> = ({
             placeholder={`Search ${getTypeTitle(entityType).toLowerCase()}...`}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="library-search w-full bg-[#0B0B0D] border border-[#E2B3FF]/30 rounded-lg pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-[#6EF0FF]"
+            className="library-search w-full bg-ixi-ink border border-[#E2B3FF]/30 rounded-lg pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-[#6EF0FF]"
           />
         </div>
 
@@ -103,7 +103,7 @@ export const EntityList: React.FC<EntityListProps> = ({
               className={`px-2.5 py-1 rounded-md text-[11px] font-semibold transition-all artdeco-chamfer-sm ${
                 selectedTag === null
                   ? 'bg-[#B8FFD9] text-[#0B0B0D]'
-                  : 'bg-[#0B0B0D] border border-[#E2B3FF]/30 text-slate-300 hover:text-white'
+                  : 'bg-ixi-ink border border-[#E2B3FF]/30 text-ixi-paper hover:text-white'
               }`}
             >
               All
@@ -115,7 +115,7 @@ export const EntityList: React.FC<EntityListProps> = ({
                 className={`px-2.5 py-1 rounded-md text-[11px] font-semibold transition-all artdeco-chamfer-sm ${
                   selectedTag === tag
                     ? 'bg-[#B8FFD9] text-[#0B0B0D]'
-                    : 'bg-[#0B0B0D] border border-[#E2B3FF]/30 text-slate-300 hover:text-white'
+                    : 'bg-ixi-ink border border-[#E2B3FF]/30 text-ixi-paper hover:text-white'
                 }`}
               >
                 #{tag}
@@ -128,12 +128,12 @@ export const EntityList: React.FC<EntityListProps> = ({
       {/* Entity Grid */}
       {filteredEntities.length === 0 ? (
         <div className="text-center py-16 artdeco-card rounded-xl">
-          <p className="text-slate-400 text-xs mb-3">
+          <p className="text-ixi-muted text-xs mb-3">
             No {getTypeTitle(entityType).toLowerCase()} found in world database.
           </p>
           <button
             onClick={() => onCreateEntity(entityType)}
-            className="px-4 py-2 rounded-md bg-[#0B0B0D] text-[#6EF0FF] border border-[#6EF0FF]/40 text-xs font-bold hover:border-[#6EF0FF] artdeco-chamfer-sm"
+            className="px-4 py-2 rounded-md bg-ixi-ink text-[#6EF0FF] border border-[#6EF0FF]/40 text-xs font-bold hover:border-[#6EF0FF] artdeco-chamfer-sm"
           >
             Create First {entityType.toUpperCase()}
           </button>
@@ -148,10 +148,10 @@ export const EntityList: React.FC<EntityListProps> = ({
             >
               <div>
                 <div className="flex items-start justify-between gap-2 mb-2">
-                  <h3 className="font-bold text-slate-100 group-hover:text-[#6EF0FF] text-base transition-colors font-sans">
+                  <h3 className="font-bold text-ixi-paper group-hover:text-[#6EF0FF] text-base transition-colors font-sans">
                     {entity.name}
                   </h3>
-                  <span className="text-[9px] font-bold uppercase tracking-wider bg-[#0B0B0D] text-[#B8FFD9] px-2 py-0.5 rounded border border-[#B8FFD9]/30 shrink-0">
+                  <span className="text-[9px] font-bold uppercase tracking-wider bg-ixi-ink text-[#B8FFD9] px-2 py-0.5 rounded border border-[#B8FFD9]/30 shrink-0">
                     {entity.canonState}
                   </span>
                 </div>
@@ -162,17 +162,17 @@ export const EntityList: React.FC<EntityListProps> = ({
                   </div>
                 )}
 
-                <p className="text-xs text-slate-300 line-clamp-3 mb-3">
+                <p className="text-xs text-ixi-paper line-clamp-3 mb-3">
                   {entity.description || 'No description recorded.'}
                 </p>
               </div>
 
-              <div className="pt-3 border-t border-[#E2B3FF]/20 flex items-center justify-between text-[11px] text-slate-400">
+              <div className="pt-3 border-t border-[#E2B3FF]/20 flex items-center justify-between text-[11px] text-ixi-muted">
                 <span>{(entity.relationships || []).length} relationships</span>
                 {(entity.tags || []).length > 0 && (
                   <div className="flex gap-1">
                     {(entity.tags || []).slice(0, 2).map((t) => (
-                      <span key={t} className="bg-[#0B0B0D] text-[#6EF0FF] border border-[#6EF0FF]/30 px-1.5 py-0.5 rounded text-[10px]">
+                      <span key={t} className="bg-ixi-ink text-[#6EF0FF] border border-[#6EF0FF]/30 px-1.5 py-0.5 rounded text-[10px]">
                         #{t}
                       </span>
                     ))}

@@ -82,8 +82,8 @@ export const TemplateManager: React.FC<TemplateManagerProps> = ({ templates, onS
   ];
 
   return (
-    <div className="p-6 max-w-5xl mx-auto space-y-6 text-slate-100">
-      <div className="bg-[#14141D] p-5 rounded-xl border border-[#E2B3FF]/30 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4 artdeco-frame">
+    <div className="p-6 max-w-5xl mx-auto space-y-6 text-ixi-paper">
+      <div className="bg-ixi-surface p-5 rounded-xl border border-[#E2B3FF]/30 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4 artdeco-frame">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <IXIMark />
@@ -92,7 +92,7 @@ export const TemplateManager: React.FC<TemplateManagerProps> = ({ templates, onS
               <span>Custom Entity Schema Templates</span>
             </h2>
           </div>
-          <p className="text-xs text-slate-300">
+          <p className="text-xs text-ixi-paper">
             Configure custom fields for world entities.
           </p>
         </div>
@@ -115,7 +115,7 @@ export const TemplateManager: React.FC<TemplateManagerProps> = ({ templates, onS
             className={`px-3.5 py-2 rounded-md text-xs font-bold uppercase transition-all shrink-0 artdeco-chamfer-sm ${
               selectedType === type
                 ? 'bg-[#6EF0FF] text-[#0B0B0D]'
-                : 'bg-[#0B0B0D] border border-[#E2B3FF]/30 text-slate-300 hover:text-white'
+                : 'bg-ixi-ink border border-[#E2B3FF]/30 text-ixi-paper hover:text-white'
             }`}
           >
             {type}
@@ -126,13 +126,13 @@ export const TemplateManager: React.FC<TemplateManagerProps> = ({ templates, onS
       {/* Field List Configuration */}
       <div className="artdeco-card rounded-xl p-6 shadow-xl space-y-4">
         <div className="flex items-center justify-between border-b border-[#E2B3FF]/20 pb-3">
-          <h3 className="font-bold text-slate-200 text-sm font-artdeco tracking-wider">
+          <h3 className="font-bold text-ixi-paper text-sm font-artdeco tracking-wider">
             Schema Fields for {selectedType.toUpperCase()} ({(activeTemplate.fields || []).length})
           </h3>
 
           <button
             onClick={handleAddField}
-            className="px-3 py-1.5 rounded-md bg-[#0B0B0D] text-[#6EF0FF] border border-[#6EF0FF]/40 text-xs font-bold hover:border-[#6EF0FF] flex items-center gap-1.5 artdeco-chamfer-sm"
+            className="px-3 py-1.5 rounded-md bg-ixi-ink text-[#6EF0FF] border border-[#6EF0FF]/40 text-xs font-bold hover:border-[#6EF0FF] flex items-center gap-1.5 artdeco-chamfer-sm"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Add Custom Field</span>
@@ -140,7 +140,7 @@ export const TemplateManager: React.FC<TemplateManagerProps> = ({ templates, onS
         </div>
 
         {(activeTemplate.fields || []).length === 0 ? (
-          <div className="text-center py-10 text-slate-500 text-xs">
+          <div className="text-center py-10 text-ixi-muted text-xs">
             No custom schema fields defined for {selectedType}. Click "Add Custom Field" to extend this entity schema.
           </div>
         ) : (
@@ -148,7 +148,7 @@ export const TemplateManager: React.FC<TemplateManagerProps> = ({ templates, onS
             {(activeTemplate.fields || []).map((field, idx) => (
               <div
                 key={field.id}
-                className="p-4 rounded-md bg-[#0B0B0D] border border-[#E2B3FF]/20 grid grid-cols-1 md:grid-cols-12 gap-3 items-center artdeco-chamfer-sm"
+                className="p-4 rounded-md bg-ixi-ink border border-[#E2B3FF]/20 grid grid-cols-1 md:grid-cols-12 gap-3 items-center artdeco-chamfer-sm"
               >
                 <div className="md:col-span-5">
                   <label className="block text-[10px] font-bold text-[#E2B3FF] uppercase mb-1">
@@ -158,7 +158,7 @@ export const TemplateManager: React.FC<TemplateManagerProps> = ({ templates, onS
                     type="text"
                     value={field.name}
                     onChange={(e) => handleUpdateField(field.id, { name: e.target.value })}
-                    className="w-full bg-[#14141D] border border-[#E2B3FF]/30 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#6EF0FF]"
+                    className="w-full bg-ixi-surface border border-[#E2B3FF]/30 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#6EF0FF]"
                   />
                 </div>
 
@@ -171,7 +171,7 @@ export const TemplateManager: React.FC<TemplateManagerProps> = ({ templates, onS
                     onChange={(e) =>
                       handleUpdateField(field.id, { fieldType: e.target.value as FieldType })
                     }
-                    className="w-full bg-[#14141D] border border-[#6EF0FF]/30 rounded-lg px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-[#6EF0FF]"
+                    className="w-full bg-ixi-surface border border-[#6EF0FF]/30 rounded-lg px-3 py-1.5 text-xs text-ixi-paper focus:outline-none focus:border-[#6EF0FF]"
                   >
                     <option value="text">Single Line Text</option>
                     <option value="longtext">Long Text / Paragraph</option>

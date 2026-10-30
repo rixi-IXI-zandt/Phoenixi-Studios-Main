@@ -167,15 +167,15 @@ export const StoryManager: React.FC<StoryManagerProps> = ({
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6 text-slate-100">
+    <div className="story-workspace p-6 max-w-7xl mx-auto space-y-6 text-ixi-paper">
       {/* Header */}
-      <div className="bg-slate-900 p-5 rounded-xl border border-slate-800 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-ixi-ink p-5 rounded-xl border border-ixi-surface shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h2 className="text-xl font-black text-white tracking-tight flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-emerald-400" />
+            <BookOpen className="w-5 h-5 text-px-mint" />
             <span>Story & Chapter Environment</span>
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-ixi-muted mt-1">
             Organize chapters, scenes, plotlines, and write manuscripts.
           </p>
         </div>
@@ -184,7 +184,7 @@ export const StoryManager: React.FC<StoryManagerProps> = ({
           {selectedStory && (
             <button
               onClick={handleExportDocx}
-              className="px-3.5 py-2 rounded-lg bg-slate-800 border border-slate-700 text-emerald-400 text-xs font-bold hover:bg-slate-700 flex items-center gap-1.5"
+              className="px-3.5 py-2 rounded-lg bg-ixi-surface border border-ixi-line text-px-mint text-xs font-bold hover:bg-ixi-line flex items-center gap-1.5"
             >
               <Download className="w-4 h-4" />
               <span>Export Story Manuscript</span>
@@ -193,7 +193,7 @@ export const StoryManager: React.FC<StoryManagerProps> = ({
 
           <button
             onClick={() => setShowNewStoryModal(true)}
-            className="px-4 py-2 rounded-lg bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-500 flex items-center gap-2 shadow-lg shadow-emerald-600/10 transition-colors"
+            className="px-4 py-2 rounded-lg bg-px-mint text-white text-xs font-bold hover:bg-px-mint flex items-center gap-2 shadow-lg shadow-px-mint/10 transition-colors"
           >
             <Plus className="w-4 h-4" />
             <span>New Story</span>
@@ -202,28 +202,28 @@ export const StoryManager: React.FC<StoryManagerProps> = ({
       </div>
 
       {/* Main Grid: Story selector sidebar + Chapter/Scene Hierarchy */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="story-layout">
         {/* Story Sidebar list */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-lg space-y-2">
-          <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+        <div className="bg-ixi-ink border border-ixi-surface rounded-xl p-4 shadow-lg space-y-2">
+          <div className="text-xs font-bold text-ixi-muted uppercase tracking-wider mb-2">
             Stories ({safeStories.length})
           </div>
 
           {safeStories.length === 0 ? (
-            <div className="text-center py-8 text-slate-500 text-xs">No stories created yet.</div>
+            <div className="text-center py-8 text-ixi-muted text-xs">No stories created yet.</div>
           ) : (
             safeStories.map((story) => (
               <button
-                key={story.id}
+                key={story.id} aria-current={selectedStoryId===story.id?'true':undefined}
                 onClick={() => setSelectedStoryId(story.id)}
                 className={`w-full text-left p-3 rounded-lg border transition-colors ${
                   selectedStoryId === story.id
-                    ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/40 font-bold'
-                    : 'bg-slate-800/40 border-slate-700/60 text-slate-300 hover:bg-slate-800'
+                    ? 'bg-px-mint/15 text-px-mint border-px-mint/40 font-bold'
+                    : 'bg-ixi-surface/40 border-ixi-line/60 text-ixi-paper hover:bg-ixi-surface'
                 }`}
               >
                 <div className="text-sm line-clamp-1">{story.title}</div>
-                <div className="text-[10px] text-slate-400 mt-1 font-normal">
+                <div className="text-[10px] text-ixi-muted mt-1 font-normal">
                   {(story.chapters || []).length} Chapters • {story.status}
                 </div>
               </button>
@@ -232,22 +232,22 @@ export const StoryManager: React.FC<StoryManagerProps> = ({
         </div>
 
         {/* Selected Story Chapters & Scenes Panel */}
-        <div className="md:col-span-3 space-y-4">
+        <div className="space-y-4">
           {!selectedStory ? (
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-12 text-center text-slate-500 text-xs">
+            <div className="bg-ixi-ink border border-ixi-surface rounded-xl p-12 text-center text-ixi-muted text-xs">
               Select or create a story to start editing chapters and scenes.
             </div>
           ) : (
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl space-y-6">
+            <div className="bg-ixi-ink border border-ixi-surface rounded-xl p-6 shadow-xl space-y-6">
               {/* Story Title & Description Edit */}
-              <div className="space-y-3 pb-4 border-b border-slate-800">
+              <div className="space-y-3 pb-4 border-b border-ixi-surface">
                 <input
-                  type="text"
+                  type="text" aria-label="Story title"
                   value={selectedStory.title || ''}
                   onChange={(e) =>
                     onSaveStory({ ...selectedStory, title: e.target.value })
                   }
-                  className="w-full bg-transparent text-xl font-black text-white focus:outline-none border-b border-transparent focus:border-emerald-500"
+                  className="w-full bg-transparent text-xl font-black text-white focus:outline-none border-b border-transparent focus:border-px-mint"
                 />
                 <textarea
                   rows={2}
@@ -256,21 +256,21 @@ export const StoryManager: React.FC<StoryManagerProps> = ({
                   onChange={(e) =>
                     onSaveStory({ ...selectedStory, description: e.target.value })
                   }
-                  className="w-full bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5 text-xs text-slate-200"
+                  className="w-full bg-ixi-surface/80 border border-ixi-line/80 rounded-lg p-2.5 text-xs text-ixi-paper"
                 />
               </div>
 
               {/* Chapters List & Reordering */}
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-bold text-slate-200 text-sm flex items-center gap-2">
-                    <Layers className="w-4 h-4 text-emerald-400" />
+                  <h3 className="font-bold text-ixi-paper text-sm flex items-center gap-2">
+                    <Layers className="w-4 h-4 text-px-mint" />
                     Chapters & Scenes Hierarchy
                   </h3>
 
                   <button
                     onClick={handleAddChapter}
-                    className="px-3 py-1.5 rounded-lg bg-slate-800 text-emerald-400 border border-slate-700 text-xs font-bold hover:bg-slate-700 flex items-center gap-1.5"
+                    className="px-3 py-1.5 rounded-lg bg-ixi-surface text-px-mint border border-ixi-line text-xs font-bold hover:bg-ixi-line flex items-center gap-1.5"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Add Chapter</span>
@@ -280,12 +280,12 @@ export const StoryManager: React.FC<StoryManagerProps> = ({
                 {(selectedStory.chapters || []).map((chap, cIdx) => (
                   <div
                     key={chap.id}
-                    className="bg-slate-800/40 border border-slate-700/60 rounded-xl p-4 space-y-3"
+                    className="bg-ixi-surface/40 border border-ixi-line/60 rounded-xl p-4 space-y-3"
                   >
                     {/* Chapter Header */}
                     <div className="flex items-center justify-between gap-2">
                       <input
-                        type="text"
+                        type="text" aria-label={`Chapter ${cIdx+1} title`}
                         value={chap.title || ''}
                         onChange={(e) => {
                           const updated = (selectedStory.chapters || []).map((c) =>
@@ -293,14 +293,14 @@ export const StoryManager: React.FC<StoryManagerProps> = ({
                           );
                           onSaveStory({ ...selectedStory, chapters: updated });
                         }}
-                        className="bg-transparent font-bold text-sm text-amber-400 focus:outline-none border-b border-transparent focus:border-amber-400"
+                        className="bg-transparent font-bold text-sm text-px-cyan focus:outline-none border-b border-transparent focus:border-px-cyan"
                       />
 
                       <div className="flex items-center gap-1">
                         <button
                           onClick={() => handleMoveChapter(cIdx, 'up')}
                           disabled={cIdx === 0}
-                          className="p-1 text-slate-400 hover:text-white disabled:opacity-30"
+                          className="p-1 text-ixi-muted hover:text-white disabled:opacity-30"
                           title="Move Chapter Up"
                         >
                           <MoveUp className="w-3.5 h-3.5" />
@@ -308,14 +308,14 @@ export const StoryManager: React.FC<StoryManagerProps> = ({
                         <button
                           onClick={() => handleMoveChapter(cIdx, 'down')}
                           disabled={cIdx === (selectedStory.chapters || []).length - 1}
-                          className="p-1 text-slate-400 hover:text-white disabled:opacity-30"
+                          className="p-1 text-ixi-muted hover:text-white disabled:opacity-30"
                           title="Move Chapter Down"
                         >
                           <MoveDown className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => handleAddScene(chap.id)}
-                          className="ml-2 px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:text-white text-[11px] font-semibold border border-slate-700 flex items-center gap-1"
+                          className="ml-2 px-2.5 py-1 rounded bg-ixi-surface text-ixi-paper hover:text-white text-[11px] font-semibold border border-ixi-line flex items-center gap-1"
                         >
                           <Plus className="w-3 h-3" />
                           <span>Scene</span>
@@ -324,24 +324,24 @@ export const StoryManager: React.FC<StoryManagerProps> = ({
                     </div>
 
                     {/* Scenes under this chapter */}
-                    <div className="pl-4 space-y-2 border-l-2 border-slate-700/60">
+                    <div className="pl-4 space-y-2 border-l-2 border-ixi-line/60">
                       {(chap.scenes || []).length === 0 ? (
-                        <div className="text-xs text-slate-500 italic">No scenes in this chapter yet.</div>
+                        <div className="text-xs text-ixi-muted italic">No scenes in this chapter yet.</div>
                       ) : (
                         (chap.scenes || []).map((scene) => (
                           <div
                             key={scene.id}
-                            className="p-3 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 flex items-center justify-between group transition-colors"
+                            className="p-3 rounded-lg bg-ixi-ink border border-ixi-surface hover:border-ixi-line flex items-center justify-between group transition-colors"
                           >
                             <div>
-                              <div className="text-xs font-bold text-slate-200 group-hover:text-amber-400 flex items-center gap-2">
+                              <div className="text-xs font-bold text-ixi-paper group-hover:text-px-cyan flex items-center gap-2">
                                 <span>{scene.title}</span>
-                                <span className="text-[10px] text-slate-500 font-mono">
+                                <span className="text-[10px] text-ixi-muted font-mono">
                                   ({scene.wordCount || 0} words)
                                 </span>
                               </div>
                               {scene.summary && (
-                                <div className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">
+                                <div className="text-[11px] text-ixi-muted line-clamp-1 mt-0.5">
                                   {scene.summary}
                                 </div>
                               )}
@@ -349,7 +349,7 @@ export const StoryManager: React.FC<StoryManagerProps> = ({
 
                             <button
                               onClick={() => onEditScene(scene)}
-                              className="px-3 py-1 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/30 text-xs font-bold hover:bg-amber-500/20 flex items-center gap-1"
+                              className="px-3 py-1 rounded-md bg-px-cyan/10 text-px-cyan border border-px-cyan/30 text-xs font-bold hover:bg-px-cyan/20 flex items-center gap-1"
                             >
                               <Edit3 className="w-3 h-3" />
                               <span>Edit Prose</span>
@@ -370,14 +370,14 @@ export const StoryManager: React.FC<StoryManagerProps> = ({
       {/* New Story Modal */}
       {showNewStoryModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 w-full max-w-md text-slate-100 shadow-2xl">
-            <h3 className="text-base font-bold text-emerald-400 mb-4 flex items-center gap-2">
+          <div className="bg-ixi-ink border border-ixi-surface rounded-xl p-6 w-full max-w-md text-ixi-paper shadow-2xl">
+            <h3 className="text-base font-bold text-px-mint mb-4 flex items-center gap-2">
               <BookOpen className="w-5 h-5" />
               Create New Story Project
             </h3>
             <form onSubmit={handleCreateStory} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-1">
+                <label className="block text-xs font-semibold text-ixi-muted mb-1">
                   Story Title *
                 </label>
                 <input
@@ -386,7 +386,7 @@ export const StoryManager: React.FC<StoryManagerProps> = ({
                   placeholder="e.g. Chronicles of the Ash Guard"
                   value={newStoryTitle}
                   onChange={(e) => setNewStoryTitle(e.target.value)}
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full bg-ixi-surface border border-ixi-line rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-px-mint"
                 />
               </div>
 
@@ -394,13 +394,13 @@ export const StoryManager: React.FC<StoryManagerProps> = ({
                 <button
                   type="button"
                   onClick={() => setShowNewStoryModal(false)}
-                  className="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 text-xs font-semibold hover:bg-slate-700"
+                  className="px-4 py-2 rounded-lg bg-ixi-surface text-ixi-paper text-xs font-semibold hover:bg-ixi-line"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-lg bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-500"
+                  className="px-4 py-2 rounded-lg bg-px-mint text-white text-xs font-bold hover:bg-px-mint"
                 >
                   Create Story
                 </button>
