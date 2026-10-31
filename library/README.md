@@ -27,7 +27,3 @@ Research references: [WharfKit login](https://wharfkit.com/docs/session-kit/logi
 ## IXI interface
 
 Uses the supplied Ironick display face, local Josefin Sans for reading, the Studio crest and the exact IXI palette. Controls keep interface typography. Navigation uses the Studio curtain choreography (desktop 1400 ms close, 400 ms settle, 2200 ms reveal; mobile 520 ms close and 900 ms reveal). System reduced-motion preferences are respected, with no in-app motion toggle. The editor supports Ctrl/Cmd+S to save and Escape to leave focus mode. Storage formats and membership/WAX configuration are unchanged by the visual migration.
-
-The workspace has four primary destinations: Library, Write, World and Notes. Write opens the story index; returning from a scene preserves its story. World uses a contextual selector for record types and exploration views. Search stays available in the header; project switching, backups, bookmarks, history and configuration live under Tools. Formatting, scene metadata and optional record fields open on demand. Curtain transitions separate primary destinations; movement within a section is immediate.
-
-The reductive interface was checked at 1440, 390 and 320 px, with enlarged text and reduced motion, including story editing, unsaved-draft protection, source approval, project isolation and backup restore. The 13 storage/access tests, type check, build, independence scan and site route checks pass.

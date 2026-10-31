@@ -177,9 +177,9 @@ export const WritingEditor: React.FC<WritingEditorProps> = ({
         </div>
       </div>
 
-      <details className="quiet-details"><summary>Draft options</summary><button onClick={()=>download('scene-draft.html',cleanProse(prose),'text/html')}>Download current draft</button></details>
+      <button onClick={()=>download('scene-draft.html',cleanProse(prose),'text/html')}>Download current draft</button>
       {/* Formatting Toolbar */}
-      {!zenMode && (<details className="quiet-details"><summary>Formatting</summary>
+      {!zenMode && (
         <div className="bg-ixi-ink p-2 rounded-xl border border-ixi-surface flex flex-wrap items-center gap-1 text-ixi-paper">
           <button
             type="button"
@@ -251,7 +251,7 @@ export const WritingEditor: React.FC<WritingEditorProps> = ({
           >
             <Redo className="w-4 h-4" />
           </button>
-        </div></details>
+        </div>
       )}
 
       {/* Main Rich Prose Area */}
@@ -266,7 +266,7 @@ export const WritingEditor: React.FC<WritingEditorProps> = ({
       </div>
 
       {/* Scene Metadata Controls */}
-      {!zenMode && (<details className="quiet-details"><summary>Scene details</summary>
+      {!zenMode && (
         <div className="bg-ixi-ink border border-ixi-surface rounded-xl p-5 shadow-xl space-y-4">
           <h4 className="text-xs font-bold uppercase tracking-wider text-px-cyan">
             Scene Metadata & Participating Entities
@@ -354,7 +354,7 @@ export const WritingEditor: React.FC<WritingEditorProps> = ({
               />
             </div>
           </div>
-        </div></details>
+        </div>
       )}
     </div>
   );
