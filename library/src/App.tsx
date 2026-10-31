@@ -1,7 +1,7 @@
 import React, {useState,useEffect,useRef} from 'react';
 import {IXITransition,useIXITransition} from './components/IXITransition';
 import {Header} from './components/Header';
-import {Sidebar} from './components/Sidebar';
+import {Sidebar,WorldNavigation} from './components/Sidebar';
 import {GlobalSearchModal} from './components/GlobalSearchModal';
 import {ContextualSidebar} from './components/ContextualSidebar';
 import {Overview} from './components/Overview';
@@ -39,13 +39,14 @@ export default function App(){
   useEffect(()=>{const listener=(e:StorageEvent)=>{if(e.key===store.KEY)setError('Library changed in another tab. Export any unsaved work, then reload to continue.');};window.addEventListener('storage',listener);return()=>window.removeEventListener('storage',listener);},[]);
   useEffect(()=>{const listener=(e:BeforeUnloadEvent)=>{if(dirty){e.preventDefault();e.returnValue='';}};window.addEventListener('beforeunload',listener);return()=>window.removeEventListener('beforeunload',listener);},[dirty]);
   useEffect(()=>{const listener=(e:KeyboardEvent)=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();setSearch(v=>!v);}if(e.key==='Escape'){setSearch(false);setPins(false);setHistory(false);setMenu(false);}};window.addEventListener('keydown',listener);return()=>window.removeEventListener('keydown',listener);},[]);
-  const setView=(next:string)=>travel(()=>changeView(next));
+  const sectionOf=(v:string)=>['stories','editor','threads'].includes(v)?'write':['entities','entity_detail','graph','maps','timeline','assets'].includes(v)?'world':v;
+  const setView=(next:string)=>{if(sectionOf(next)===sectionOf(view))changeView(next);else travel(()=>changeView(next));};
   const leave=()=>{if(dirty&&!window.confirm('Leave without saving these edits?'))return false;setDirty(false);return true;};
   const navigate=(next:string,nextType?:EntityType,target='')=>{
     if(busy.current||!leave())return;
-    const map={entity_list:'entities',template_manager:'templates',relationship_graph:'graph',story_database:'stories',plot_threads:'threads',map_system:'maps',notes_ingestion:'notes',extraction_queue:'notes',asset_library:'assets'};
+    const map={story_index:'stories',entity_list:'entities',template_manager:'templates',relationship_graph:'graph',story_database:'stories',plot_threads:'threads',map_system:'maps',notes_ingestion:'notes',extraction_queue:'notes',asset_library:'assets'};
     const actual=map[next]||next;
-    setMenu(false);setSearch(false);travel(()=>{changeView(actual);if(nextType)setType(nextType);setSelected(actual==='entity_detail'?target:'');});
+    setMenu(false);setSearch(false);const apply=()=>{if(next==='story_index')setStoryId('');changeView(actual);if(nextType)setType(nextType);setSelected(actual==='entity_detail'?target:'');};if(sectionOf(actual)===sectionOf(view))apply();else travel(apply);
     if(current.current){const d=store.copy(current.current);d.history=[{type:actual==='entity_detail'?'entity':'view',targetId:target||actual,title:actual==='entity_detail'?d.entities.find(e=>e.id===target)?.name||'Entity':actual,projectId:d.activeProjectId,timestamp:Date.now()},...d.history.filter(h=>!(h.targetId===(target||actual)&&h.projectId===d.activeProjectId))].slice(0,50) as any;commit(d);}
   };
   if(!db)return <main className="p-8"><h1>Library recovery</h1><p role="alert">{error}</p><p>Your stored records have not been replaced.</p><button onClick={()=>store.download('phoenixi-raw-recovery.json',store.rawBackup())}>Download recovery data</button></main>;
@@ -81,7 +82,7 @@ export default function App(){
   };
   return <div className="library-app">
     <a href="#library-workspace" className="library-skip">Skip to workspace</a><div className="library-atmosphere" aria-hidden="true"><i/><i/></div><div className="library-frame" aria-hidden="true"/>
-    <Header transitioning={phase!=='idle'} menuOpen={menu} projects={db.projects} activeProject={project} database={db}
+    <Header onNavigate={navigate} transitioning={phase!=='idle'} menuOpen={menu} projects={db.projects} activeProject={project} database={db}
       onSelectProject={id=>{if(!leave())return;if(commit({...current.current!,activeProjectId:id})){setView('overview');setSource(null);setSelected('');setUndo(null);}}}
       onProjectCreated={p=>{if(!leave())return;if(commit({...current.current!,projects:[...current.current!.projects,p],activeProjectId:p.id})){setView('overview');setUndo(null);}}}
       onRestore={next=>{if(!leave())return false;const ok=commit({...next,revision:current.current!.revision},true);if(ok){setView('overview');setSource(null);}return ok;}}
@@ -91,9 +92,9 @@ export default function App(){
     </div>
     {error&&<div role="alert" className="error-banner">{error}<button onClick={()=>store.download('phoenixi-unsaved-recovery.json',store.backup(current.current!))}>Export current library</button></div>}
     <div className="workspace" inert={phase!=='idle'}>
-      {menu&&<button className="navigation-backdrop" aria-label="Close navigation" onClick={()=>setMenu(false)}/>}
-      <div id="library-navigation" className={'navigation '+(menu?'navigation-open':'')}><Sidebar onClose={()=>setMenu(false)} currentView={view} selectedEntityType={type} onNavigateView={navigate} pendingExtractionCount={data.extractedFacts.filter(f=>f.status==='PROPOSED').length}/></div>
+      <Sidebar currentView={view} onNavigateView={navigate}/>
       <main key={project.id} id="library-workspace" tabIndex={-1} className="workspace-content" data-view={view} aria-busy={phase!=='idle'}>
+        {['entities','graph','timeline','maps','assets'].includes(view)&&<WorldNavigation view={view} type={type} onNavigate={navigate}/>}
         {view==='overview'&&<Overview project={project} {...data} onSelectEntity={selectEntity} onNavigateView={navigate}/>}
         {view==='entities'&&<EntityList entityType={type} entities={data.entities} onSelectEntity={selectEntity} onCreateEntity={t=>{const e=entity(project.id,t||type,'New '+(t||type));if(put('entities',e))selectEntity(e.id);}}/>}
         {view==='entity_detail'&&selectedEntity&&<EntityDetail key={selectedEntity.id} entity={selectedEntity} allEntities={data.entities} templates={data.templates}
@@ -104,7 +105,7 @@ export default function App(){
           isBookmarked={db.bookmarks.some(b=>b.targetId===selectedEntity.id&&b.projectId===project.id)}/>}
         {view==='templates'&&<TemplateManager templates={data.templates} onSaveTemplate={t=>put('templates',t)} onDirtyChange={setDirty}/>}
         {view==='graph'&&<RelationshipGraph entities={data.entities} onSelectEntity={selectEntity}/>}
-        {view==='stories'&&<StoryManager key={storyId} initialStoryId={storyId} stories={data.stories} allEntities={data.entities} onSaveStory={s=>put('stories',s)} onDeleteStory={id=>remove('stories',id)} onEditScene={s=>{if(!leave())return;setSceneId(s.id);setStoryId(data.stories.find(story=>story.chapters.some(c=>c.scenes.some(sc=>sc.id===s.id)))?.id||'');setView('editor');}}/>}
+        {view==='stories'&&<StoryManager onOpenThreads={()=>navigate('threads')} key={storyId} initialStoryId={storyId} stories={data.stories} allEntities={data.entities} onSaveStory={s=>put('stories',s)} onDeleteStory={id=>remove('stories',id)} onEditScene={s=>{if(!leave())return;setSceneId(s.id);setStoryId(data.stories.find(story=>story.chapters.some(c=>c.scenes.some(sc=>sc.id===s.id)))?.id||'');setView('editor');}}/>}
         {view==='editor'&&(scene?<WritingEditor key={scene.id} scene={scene} allEntities={data.entities} onSaveScene={onScene} onDirtyChange={setDirty} onBack={()=>navigate('stories')}/>:<p className="p-6">This scene is no longer available.</p>)}
         {view==='notes'&&<NotesAndExtraction key={noteId} initialNoteId={noteId} source={source} {...data} allEntities={data.entities}
           onSaveNote={n=>put('notes',n)} onDeleteNote={id=>remove('notes',id)}

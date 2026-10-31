@@ -273,7 +273,8 @@ export const EntityDetail: React.FC<EntityDetailProps> = ({
           </div>
         </div>
 
-        {/* Aliases */}
+        <details className="quiet-details"><summary>Other names</summary>
+{/* Aliases */}
         <div>
           <label className="block text-xs font-semibold text-[#E2B3FF] mb-1 uppercase tracking-wider">
             Aliases & Alternate Names
@@ -314,7 +315,8 @@ export const EntityDetail: React.FC<EntityDetailProps> = ({
           </div>
         </div>
 
-        {/* Description */}
+        </details>
+{/* Description */}
         <div>
           <label className="block text-xs font-semibold text-[#E2B3FF] mb-1 uppercase tracking-wider">
             Description & Overview
@@ -327,7 +329,8 @@ export const EntityDetail: React.FC<EntityDetailProps> = ({
           />
         </div>
 
-        {/* Tags */}
+        <details className="quiet-details"><summary>Tags</summary>
+{/* Tags */}
         <div>
           <label className="block text-xs font-semibold text-[#B8FFD9] mb-1 uppercase tracking-wider">
             Tags
@@ -368,7 +371,8 @@ export const EntityDetail: React.FC<EntityDetailProps> = ({
           </div>
         </div>
 
-        {/* Custom Template Fields */}
+        </details>
+<details className="quiet-details" open={validationError?true:undefined}><summary>Additional fields</summary>{/* Custom Template Fields */}
         {matchingTemplate && (matchingTemplate.fields || []).length > 0 && (
           <div className="pt-4 border-t border-[#E2B3FF]/20 space-y-4">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#6EF0FF] font-artdeco">
@@ -387,7 +391,7 @@ export const EntityDetail: React.FC<EntityDetailProps> = ({
           </div>
         )}
 
-        {/* Location Hierarchical Nesting (If Location) */}
+        </details>{/* Location Hierarchical Nesting (If Location) */}
         {formData.type === 'location' && (
           <div className="pt-4 border-t border-[#E2B3FF]/20 space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#B8FFD9] flex items-center gap-1.5 font-artdeco">
@@ -478,7 +482,8 @@ export const EntityDetail: React.FC<EntityDetailProps> = ({
         )}
       </div>
 
-      {/* Relationships Section */}
+      <details className="quiet-details"><summary>Relationships</summary>
+{/* Relationships Section */}
       <div className="artdeco-card rounded-xl p-6 shadow-xl space-y-4">
         <div className="flex items-center justify-between border-b border-[#E2B3FF]/20 pb-3">
           <h3 className="font-bold text-ixi-paper text-sm flex items-center gap-2 font-artdeco tracking-wider">
@@ -537,7 +542,9 @@ export const EntityDetail: React.FC<EntityDetailProps> = ({
         )}
       </div>
 
-      {/* Source Provenance References */}
+      </details>
+<details className="quiet-details"><summary>Sources</summary>
+{/* Source Provenance References */}
       <div className="artdeco-card rounded-xl p-6 shadow-xl space-y-3">
         <h3 className="font-bold text-ixi-paper text-sm border-b border-[#E2B3FF]/20 pb-3 flex items-center gap-2 font-artdeco tracking-wider">
           <ShieldCheck className="w-4 h-4 text-[#B8FFD9]" />
@@ -571,7 +578,8 @@ export const EntityDetail: React.FC<EntityDetailProps> = ({
         )}
       </div>
 
-      {/* Add Relationship Modal */}
+      </details>
+{/* Add Relationship Modal */}
       {showAddRelModal && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
           <div className="bg-ixi-surface border border-[#6EF0FF]/40 rounded-xl p-6 w-full max-w-md text-ixi-paper shadow-2xl space-y-4 artdeco-frame">
