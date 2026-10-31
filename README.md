@@ -1,12 +1,12 @@
 # IXI / Phoenixi Studios
 
-Static HTML, CSS and JavaScript, using the supplied IXI artwork, palette and local Ironick font. Worlds links to the Fourthwall shop, Discord community, and Phoenixi Library. The Library is a React application built from `library/`; its writing stays in the visitor's browser. No hosted database, API keys, or paid runtime is required.
+Static HTML, CSS and JavaScript, using the supplied IXI artwork, palette and local Ironick font. Worlds links to the Fourthwall shop and Discord community. No hosted database, API keys, or paid runtime is required.
 
 ## Local preview and checks
 
 Use Node.js 22 LTS or newer (minimum supported: 20).
 
-First run `npm ci --prefix library` and `npm run build --prefix library`. Rebuild the Library after changing its source. Use the production preview below to test the integrated `/library/` route; the source preview is for the Studio shell.
+The Library is unpublished. Its source remains in `library/` for development, but is excluded from the site build and navigation. Do not publish it again until the user approves its readiness.
 
 - `npm run dev` previews source at http://127.0.0.1:3000.
 - `npm run lint` checks JavaScript syntax.
@@ -26,7 +26,7 @@ For a subdirectory deployment, set `BASE_PATH=/studio/` when building and when r
 4. Push to the repository's default branch, or run **Deploy static site to GitHub Pages** manually from Actions. The workflow checks, builds and publishes only `dist/`.
 5. Test all four routes on the provided GitHub address before attaching the domain. Direct visits, reloads, trailing-slash routes and legacy `.html` routes are supported.
 
-No server process runs on GitHub Pages. Node is only used during the build. The workflow installs the Library's locked dependencies, checks and builds it, then publishes its compiled assets alongside the Studio. See `library/README.md` for backup/restore and inactive membership/WAX infrastructure boundaries.
+No server process runs on GitHub Pages. Node is only used during the build. The workflow checks and publishes only the Studio. The Library is not built or uploaded.
 
 ## rixi.info and the wider IXI family
 
